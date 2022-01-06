@@ -1,33 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Register from './pages/Register';
-import Continue from './pages/Continue';
-import Complete from './pages/Complete';
-import './styles/index.css';
-import App from './pages/App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import Continue from "./pages/Continue";
+import Complete from "./pages/Complete";
+import "./styles/index.css";
+import App from "./pages/App";
+import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="register" element={<Register />} />
-          <Route path="continue" element={<Continue />} />
-          <Route path="complete" element={<Complete />} />
-          <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>404 - There's nothing here!</p>
-                </main>
-              }
-            />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="register" element={<Register />} />
+        <Route path="continue" element={<Continue />} />
+        <Route path="complete" element={<Complete />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>404 - There's nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
