@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 var store = require('store')
 
 export interface IRegistrationData { 
@@ -19,14 +19,15 @@ abstract class Storage {
     }
 }
 
-export function useLocalStoredUser(sessionCode: string) { 
-  const [storedValue, setStoredValue] = useState(() => {
+type Dispatch<A> = (value: A) => void;
+export function useLocalStoredUser<S>(sessionCode: string, initalState: S | (() => S)): [S, Dispatch<S>] { 
+  const [storedValue, setStoredValue] = useState<S>(() => {
       return store.get(sessionCode);
   });
 
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
-  const setValue = (value: IRegistrationData) => {
+  const setValue: Dispatch<S> = (value: S) => {
       console.log(value);
       store.set(sessionCode, value);
       setStoredValue(value);
