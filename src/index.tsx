@@ -7,25 +7,29 @@ import Complete from "./pages/Complete";
 import "./styles/index.css";
 import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { theme } from "./theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="register" element={<Register />} />
-        <Route path="continue" element={<Continue />} />
-        <Route path="complete" element={<Complete />} />
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>404 - There's nothing here!</p>
-            </main>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="register" element={<Register />} />
+          <Route path="continue" element={<Continue />} />
+          <Route path="complete" element={<Complete />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>404 - There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
