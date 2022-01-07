@@ -1,6 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Chip from "@mui/material/Chip";
 import "../styles/App.css";
 import Storage, {
   useLocalStoredUser,
@@ -9,7 +12,6 @@ import Storage, {
 
 function App() {
   useEffect(() => {
-    console.log("useEffect");
     // save for sideeffect of changing data
     Storage.addTestData();
   }, []);
@@ -21,21 +23,30 @@ function App() {
     lastname: "",
   });
 
+  const nameRegex = new RegExp("^([ \u00c0-\u01ffa-zA-Z'-])+$");
+  let isNameValid = nameRegex.test(userData?.firstname ?? "");
+
   let content;
   if (userData === undefined) {
-    content = <p>Nothing Found</p>;
+    content = <p>No Data Found</p>;
   } else {
     content = (
-      <div>
-        <input
-          type="text"
-          placeholder="enter your name"
+      <div style={{ marginTop: "16px" }}>
+        <TextField
+          variant="outlined"
+          label="Vorame"
+          type="name"
+          value={userData.firstname}
           onChange={(e) => {
             setUserData({ ...userData, firstname: e.target.value });
           }}
-          value={userData.firstname}
+          placeholder="Vorname eintragen"
+          helperText={isNameValid ? undefined : "Keine Sonderzeichen verwenden"}
+          error={!isNameValid}
         />
-        <p>{userData.firstname}</p>
+        <div style={{ marginTop: "8px" }}>
+          <Chip label={"Vorname: " + userData.firstname} color="success" />
+        </div>
       </div>
     );
   }
@@ -44,11 +55,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Treeuniversity</h1>
-        <Link to="/register">Register</Link>
-        <Link to="/continue">ContinueRegistration</Link>
-        <Link to="/complete">Complete</Link>
+        <Link to="/register">
+          <Button variant="contained">Register</Button>
+        </Link>
+        <Link to="/continue">
+          <Button variant="outlined">ContinueRegistration</Button>
+        </Link>
+        <Link to="/complete">
+          <Button variant="outlined">Complete</Button>
+        </Link>
+        {content}
       </header>
-      {content}
     </div>
   );
 }
