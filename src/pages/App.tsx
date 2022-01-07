@@ -45,7 +45,7 @@ function App() {
           error={!isNameValid}
         />
         <div style={{ marginTop: "8px" }}>
-          <Chip label={"Vorname: " + userData.firstname} color="success" />
+          <Chip label={"Vorname: " + userData.firstname} />
         </div>
       </div>
     );
