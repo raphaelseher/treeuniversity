@@ -1,9 +1,7 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import Storage, {
-  useLocalStoredUser,
-  IRegistrationData,
-} from "adapters/storage";
+import Storage, { useLocalStoredUser } from "adapters/storage";
+import IRegistrationData from "adapters/RegistrationData";
 import LinearProgress from "@mui/material/LinearProgress";
 import PlaceholderText from "components/PlaceholderText";
 import "styles/StudentCard.css";

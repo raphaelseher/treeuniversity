@@ -1,11 +1,6 @@
 import { SetStateAction, useState } from "react";
 var store = require("store");
 
-export interface IRegistrationData {
-  firstname: string;
-  lastname: string;
-}
-
 abstract class Storage {
   public static addTestData(): void {
     console.log("Gorilla");
