@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
-import Header from "components/header";
+import Header from "components/Header";
 import "styles/App.css";
 import Storage, {
   useLocalStoredUser,
@@ -48,7 +48,7 @@ function App() {
           type="name"
           value={userData.firstname}
           onChange={(e) => {
-            // this will automatically save all the data to the local storage. 
+            // this will automatically save all the data to the local storage.
             // Check it with developer tools (F12 or Control+Shift+I)
             // { ...userData, [new values,]} is the Javascript Spread Operator
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
@@ -59,10 +59,10 @@ function App() {
           error={!isNameValid}
         />
         <div style={{ marginTop: "8px" }}>
-          { 
-          // inject Code in this "JSX" with curly brackets
+          {
+            // inject Code in this "JSX" with curly brackets
           }
-          <Chip label={ "Vorname: " + userData.firstname } />
+          <Chip label={"Vorname: " + userData.firstname} />
         </div>
       </div>
     );
