@@ -13,11 +13,7 @@ type StudentCardProps = {
 function StudentCard(props: StudentCardProps) {
   const [userData, setUserData] = useLocalStoredUser<
     IRegistrationData | undefined
-  >(props.registrationCode, {
-    // default values
-    firstname: "",
-    lastname: "",
-  });
+  >(props.registrationCode, undefined);
 
   return (
     <Card id="student-card">
@@ -41,12 +37,14 @@ function StudentCard(props: StudentCardProps) {
             />
           </div>
           <div className="name-content">
-            <PlaceholderText placeholder="John" value={undefined} />
-            <PlaceholderText placeholder="Doe" value={undefined} />
+            <PlaceholderText placeholder="John" value={userData?.firstname} />
+            <PlaceholderText placeholder="Doe" value={userData?.lastname} />
             <PlaceholderText
               className="date"
               placeholder="01.01.1960"
-              value={undefined}
+              value={new Date(
+                userData?.birthDate ?? new Date()
+              ).toLocaleDateString()}
             />
           </div>
         </div>

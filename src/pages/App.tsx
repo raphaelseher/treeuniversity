@@ -21,11 +21,7 @@ function App() {
   // userData is the data to use in the component. setUserData used to change the values.
   const [userData, setUserData] = useLocalStoredUser<
     IRegistrationData | undefined
-  >(registrationCode, {
-    // default values
-    firstname: "",
-    lastname: "",
-  });
+  >(registrationCode, undefined);
 
   // regex used for validation of input
   const nameRegex = new RegExp("^([ \u00c0-\u01ffa-zA-Z'-])+$");

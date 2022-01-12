@@ -3,8 +3,11 @@ var store = require("store");
 
 abstract class Storage {
   public static addTestData(): void {
-    console.log("Gorilla");
-    store.set("1", { firstname: "Raphael", lastname: "Seher" });
+    store.set("1", {
+      firstname: "Raphael",
+      lastname: "Seher",
+      birthDate: new Date(1993, 12, 3),
+    });
     store.set("2", { firstname: "Pavel" });
     store.set("3", { firstname: "Phillipp" });
   }
