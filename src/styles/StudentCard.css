@@ -11,6 +11,7 @@
   --margin-default: 16px;
   --margin-related-items: 8px;
 }
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -18,6 +19,10 @@
 
 #student-card {
   color: var(--font-default-dark-color);
+}
+
+#student-card .text-placeholder {
+  color: var(--default-inactive-color);
 }
 
 #student-card .card-header {

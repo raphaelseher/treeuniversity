@@ -1,11 +1,26 @@
 import React from "react";
 import Card from "@mui/material/Card";
+import Storage, {
+  useLocalStoredUser,
+  IRegistrationData,
+} from "adapters/storage";
 import LinearProgress from "@mui/material/LinearProgress";
+import PlaceholderText from "components/PlaceholderText";
 import "styles/StudentCard.css";
 
 // Parameters are called Props in React.
-type StudentCardProps = {};
+type StudentCardProps = {
+  registrationCode: string;
+};
 function StudentCard(props: StudentCardProps) {
+  const [userData, setUserData] = useLocalStoredUser<
+    IRegistrationData | undefined
+  >(props.registrationCode, {
+    // default values
+    firstname: "",
+    lastname: "",
+  });
+
   return (
     <Card id="student-card">
       <div className="card-header flex-row">
@@ -28,22 +43,34 @@ function StudentCard(props: StudentCardProps) {
             />
           </div>
           <div className="name-content">
-            <p>Max</p>
-            <p>Mustermann</p>
-            <p className="date">03.12.1993</p>
+            <PlaceholderText placeholder="John" value={undefined} />
+            <PlaceholderText placeholder="Doe" value={undefined} />
+            <PlaceholderText
+              className="date"
+              placeholder="01.01.1960"
+              value={undefined}
+            />
           </div>
         </div>
         <div className="flex-row studies-row">
           <p className="studies-title">
             <strong>Studies:</strong>
           </p>
-          <p className="studies-value">Some Studies, dont know what.</p>
+          <PlaceholderText
+            className="studies-value"
+            placeholder="Choosen Studies"
+            value={undefined}
+          />
         </div>
         <div className="flex-row studies-row">
           <p className="studies-title">
             <strong>Valid until:</strong>
           </p>
-          <p className="studies-value">21.02.2022</p>
+          <PlaceholderText
+            className="studies-value"
+            placeholder="01.03.2022"
+            value={undefined}
+          />
         </div>
       </div>
       <LinearProgress className="progress" variant="buffer" value={20} />
