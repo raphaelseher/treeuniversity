@@ -1,0 +1,92 @@
+:root {
+  --primary-color: #388e3c;
+  --primary-light-color: #6abf69;
+  --primary-dark-color: #00600f;
+
+  --default-inactive-color: #c1c1c1;
+
+  --font-default-dark-color: #263238;
+  --font-weight-semibold: 600;
+
+  --margin-default: 16px;
+  --margin-related-items: 8px;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+#student-card {
+  color: var(--font-default-dark-color);
+}
+
+#student-card .card-header {
+  align-items: center;
+  background-color: var(--primary-light-color);
+  padding: 8px 0 8px 0;
+}
+
+#student-card .card-header h4 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+#student-card .card-header .logo {
+  margin: 0 var(--margin-default) 0 var(--margin-default);
+}
+
+#student-card .card-content {
+  padding: var(--margin-default);
+}
+
+#student-card .card-content .name-image-row {
+  align-items: center;
+}
+
+#student-card .card-content .name-image-row .img-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+#student-card .card-content .name-image-row .img-wrapper .user-image {
+  background: var(--default-inactive-color);
+  position: relative;
+  top: -1px;
+  left: -1px;
+}
+
+#student-card .card-content .name-image-row .name-content {
+  margin-left: var(--margin-default);
+  font-size: 22px;
+}
+
+#student-card .card-content .name-image-row .name-content .date {
+  font-size: 16px;
+}
+
+#student-card .card-content .name-image-row .name-content p {
+  margin: 0 0 var(--margin-related-items) 0;
+}
+
+#student-card .card-content .studies-row {
+  margin-top: var(--margin-default);
+}
+
+#student-card .card-content .studies-row p {
+  margin: 0;
+}
+
+#student-card .card-content .studies-row .studies-title {
+  min-width: 80px;
+  text-align: end;
+}
+
+#student-card .card-content .studies-row .studies-value {
+  margin-left: var(--margin-default);
+}
+
+#student-card .progress {
+  height: 10px;
+}
