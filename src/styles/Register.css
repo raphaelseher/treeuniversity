@@ -15,10 +15,3 @@
   overflow: scroll;
   padding: var(--padding-default);
 }
-
-#register-page #sidebar {
-  flex-basis: 524px;
-  flex-grow: 1;
-  padding: var(--padding-default);
-  border-left: 2px solid var(--default-inactive-color);
-}
