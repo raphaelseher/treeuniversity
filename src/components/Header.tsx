@@ -1,5 +1,7 @@
 import React from "react";
+import { EnvironmentConsumer } from "context/Environment";
 import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
 import "styles/Header.css";
 
 // Parameters are called Props in React.
@@ -17,6 +19,18 @@ function Header(props: HeaderProps) {
             </div>
           )
         }
+        <EnvironmentConsumer>
+          {([environment, setEnvironment]) => (
+            <Button
+              variant="contained"
+              onClick={() => {
+                setEnvironment({ ...environment, registrationCode: "1" });
+              }}
+            >
+              Set RegistrationCode to 1
+            </Button>
+          )}
+        </EnvironmentConsumer>
       </header>
     </div>
   );
