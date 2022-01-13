@@ -1,17 +1,3 @@
-:root {
-  --primary-color: #388e3c;
-  --primary-light-color: #6abf69;
-  --primary-dark-color: #00600f;
-
-  --default-inactive-color: #c1c1c1;
-
-  --font-default-dark-color: #263238;
-  --font-weight-semibold: 600;
-
-  --margin-default: 16px;
-  --margin-related-items: 8px;
-}
-
 .flex-row {
   display: flex;
   flex-direction: row;
