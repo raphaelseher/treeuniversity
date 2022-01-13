@@ -2,19 +2,26 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "components/Header";
 import StudentCard from "components/StudentCard";
-import "../styles/App.css";
 import { EnvironmentConsumer } from "context/Environment";
+import "styles/Register.css";
 
 function Register() {
   return (
     <EnvironmentConsumer>
-      {([environment, setEnvironment]) => (
-        <div>
+      {([environment, _]) => (
+        <div id="register-page">
           <Header registrationCode={environment.registrationCode} />
+          <div id="content">
+            <div id="form-content">
+              <p>Form Content</p>
+            </div>
+            <div id="sidebar">
+              <p>Sidebar</p>
+            </div>
+          </div>
           {environment.registrationCode && (
             <StudentCard registrationCode={environment.registrationCode} />
           )}
-          <Link to="/">Back</Link>
         </div>
       )}
     </EnvironmentConsumer>
