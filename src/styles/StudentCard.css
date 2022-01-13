@@ -60,6 +60,7 @@
   position: relative;
   top: -1px;
   left: -1px;
+  object-fit: cover;
 }
 
 #student-card .card-content .name-image-row .name-content {

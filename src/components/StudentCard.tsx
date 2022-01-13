@@ -33,7 +33,7 @@ function StudentCard(props: StudentCardProps) {
               width="82px"
               height="82px"
               className="user-image"
-              src={undefined}
+              src={"data:image/png;base64," + userData?.image}
             />
           </div>
           <div className="name-content">
@@ -42,9 +42,10 @@ function StudentCard(props: StudentCardProps) {
             <PlaceholderText
               className="date"
               placeholder="01.01.1960"
-              value={new Date(
-                userData?.birthDate ?? new Date()
-              ).toLocaleDateString()}
+              value={
+                userData?.birthDate &&
+                new Date(userData.birthDate).toLocaleDateString()
+              }
             />
           </div>
         </div>
@@ -55,7 +56,7 @@ function StudentCard(props: StudentCardProps) {
           <PlaceholderText
             className="studies-value"
             placeholder="Choosen Studies"
-            value={undefined}
+            value={userData?.studySubject}
           />
         </div>
         <div className="flex-row studies-row">
@@ -65,7 +66,10 @@ function StudentCard(props: StudentCardProps) {
           <PlaceholderText
             className="studies-value"
             placeholder="01.03.2022"
-            value={undefined}
+            value={
+              userData?.validUntil &&
+              new Date(userData.validUntil).toLocaleDateString()
+            }
           />
         </div>
       </div>
