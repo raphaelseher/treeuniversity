@@ -1,7 +1,7 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 
-interface IEnvironment {
-  registrationCode?: string | undefined;
+export interface IEnvironment {
+  registrationCode?: string;
 }
 
 const defaultEnvironment: IEnvironment = {
