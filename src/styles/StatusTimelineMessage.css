@@ -19,9 +19,11 @@
 #status-message .status-message-error {
   font-size: 26px;
   color: var(--error-color);
+  padding: 4px;
 }
 
 #status-message .status-message-content {
+  padding: 0 var(--padding-default) 0 var(--padding-default);
   flex-grow: 999;
 }
 
@@ -61,8 +63,4 @@
 
 #status-message.border-right .status-message-content.error {
   border-right: 2px solid var(--error-color);
-}
-
-#status-message .status-message-content {
-  padding: 0 var(--padding-inner-items) 0 var(--padding-inner-items);
 }

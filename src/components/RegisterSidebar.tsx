@@ -3,6 +3,7 @@ import IRegistrationData from "adapters/RegistrationData";
 import { useLocalStoredUser } from "adapters/storage";
 import StudentCard from "components/StudentCard";
 import Button from "@mui/material/Button";
+import StatusTimeline from "components/StatusTimeline";
 import "styles/RegisterSidebar.css";
 
 interface RegisterSidebarProps {
@@ -27,6 +28,7 @@ function RegisterSidebar(props: RegisterSidebarProps) {
       <hr />
       <div className="sidebar-content">
         <h2>Status Timeline</h2>
+        <StatusTimeline registrationCode={props.registrationCode} />
       </div>
     </div>
   );
