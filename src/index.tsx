@@ -9,26 +9,31 @@ import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { theme } from "./theme";
+import EnvironmentProvider from "context/Environment";
+
+// const [environment, setEnvironment] = environmentState;
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="register" element={<Register />} />
-          <Route path="continue" element={<Continue />} />
-          <Route path="complete" element={<Complete />} />
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>404 - There's nothing here!</p>
-              </main>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <EnvironmentProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="register" element={<Register />} />
+            <Route path="continue" element={<Continue />} />
+            <Route path="complete" element={<Complete />} />
+            <Route
+              path="*"
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>404 - There's nothing here!</p>
+                </main>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </EnvironmentProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

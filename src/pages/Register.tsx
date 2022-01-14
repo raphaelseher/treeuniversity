@@ -1,18 +1,33 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import StudentCard from "components/StudentCard";
-import "../styles/App.css";
+import { EnvironmentConsumer, IEnvironment } from "context/Environment";
+import Header from "components/Header";
+import RegisterForm from "components/RegisterForm";
+import RegisterSidebar from "components/RegisterSidebar";
+import "styles/Register.css";
 
 function Register() {
-  const [registrationCode, setRegistrationCode] = useState<string>("1");
+  const renderData = (environment: IEnvironment) => {
+    if (!environment.registrationCode) {
+      return <p>Error: No Registration Code.</p>;
+    } else {
+      return (
+        <div id="content">
+          <RegisterForm registrationCode={environment.registrationCode} />
+          <RegisterSidebar registrationCode={environment.registrationCode} />
+        </div>
+      );
+    }
+  };
+
   return (
-    <div>
-      <header>
-        <h1>Register</h1>
-        <Link to="/">Back</Link>
-      </header>
-      <StudentCard registrationCode={registrationCode} />
-    </div>
+    <EnvironmentConsumer>
+      {([environment, _]) => (
+        <div id="register-page">
+          <Header registrationCode={environment.registrationCode} />
+          {renderData(environment)}
+        </div>
+      )}
+    </EnvironmentConsumer>
   );
 }
 

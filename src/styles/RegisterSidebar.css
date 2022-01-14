@@ -1,0 +1,23 @@
+#register-page #sidebar {
+  flex-basis: 524px;
+  flex-grow: 1;
+  border-left: 2px solid var(--default-inactive-color);
+}
+
+#sidebar .sidebar-content {
+  padding: var(--padding-default);
+}
+
+#sidebar .submit-button {
+  width: 100%;
+  margin-top: var(--margin-default);
+}
+
+#sidebar hr {
+  border: 1px solid var(--default-inactive-color);
+}
+
+#sidebar h2 {
+  margin: 0;
+  font-size: 34px;
+}

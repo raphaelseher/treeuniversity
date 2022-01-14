@@ -8,6 +8,7 @@ import Header from "components/Header";
 import "styles/App.css";
 import Storage, { useLocalStoredUser } from "adapters/storage";
 import IRegistrationData from "adapters/RegistrationData";
+import { EnvironmentConsumer, IEnvironment } from "context/Environment";
 
 function App() {
   useEffect(() => {
@@ -67,7 +68,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header registrationCode={registrationCode} />
+      <Header registrationCode={undefined} />
       <header className="App-header">
         <h1>Treeuniversity</h1>
         <Link to="/register">
