@@ -1,0 +1,66 @@
+#status-message {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--default-inactive-color20);
+  padding: var(--padding-inner-items);
+  margin-bottom: var(--margin-default);
+}
+
+#status-message.border-left {
+  margin-right: 24px;
+  background-color: var(--default-inactive-color20);
+}
+
+#status-message.border-right {
+  margin-left: 24px;
+  background-color: rgba(180, 205, 187, 0.2);
+}
+
+#status-message .status-message-error {
+  font-size: 26px;
+  color: var(--error-color);
+  padding: 4px;
+}
+
+#status-message .status-message-content {
+  padding: 0 var(--padding-default) 0 var(--padding-default);
+  flex-grow: 999;
+}
+
+#status-message p {
+  margin: 0;
+  margin-bottom: var(--margin-related-text);
+  padding: 2px 0 2px 0;
+  font-size: 18px;
+}
+
+#status-message.border-right p {
+  text-align: end;
+}
+
+#status-message p.status-message-time {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-dark-color);
+}
+
+#status-message p.status-message-name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#status-message.border-left .status-message-content {
+  border-left: 2px solid var(--success-color);
+}
+
+#status-message.border-right .status-message-content {
+  border-right: 2px solid var(--success-color);
+}
+
+#status-message.border-left .status-message-content.error {
+  border-left: 2px solid var(--error-color);
+}
+
+#status-message.border-right .status-message-content.error {
+  border-right: 2px solid var(--error-color);
+}

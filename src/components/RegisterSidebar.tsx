@@ -1,32 +1,77 @@
-import React, { useState } from "react";
-import IRegistrationData from "adapters/RegistrationData";
-import { useLocalStoredUser } from "adapters/storage";
 import StudentCard from "components/StudentCard";
 import Button from "@mui/material/Button";
+import StatusTimeline from "components/StatusTimeline";
+import {
+  addSubmitMessage,
+  addRegistrationCodeMessage,
+  addErrorMessage,
+  addSuccessMessage,
+} from "adapters/FakeTimelineGenerator";
+import { useUserDataContext } from "context/UserDataContext";
+import { ActionType } from "reducer/userDataReducer";
 import "styles/RegisterSidebar.css";
 
-interface RegisterSidebarProps {
-  registrationCode: string;
-}
+interface RegisterSidebarProps {}
 
 function RegisterSidebar(props: RegisterSidebarProps) {
-  const [userData, setUserData] = useLocalStoredUser<
-    IRegistrationData | undefined
-  >(props.registrationCode, undefined);
-
+  const { state, dispatch } = useUserDataContext();
   const buttonTitle = "Submit";
+
+  const addStatusMessages = () => {
+    if (state) {
+      if (state.registrationCode) {
+        dispatch({
+          type: ActionType.UpdateUserData,
+          payload: {
+            newData: addRegistrationCodeMessage(
+              state.registrationCode,
+              state.userData
+            ),
+          },
+        });
+      }
+
+      dispatch({
+        type: ActionType.UpdateUserData,
+        payload: {
+          newData: addSubmitMessage(state.userData),
+        },
+      });
+
+      dispatch({
+        type: ActionType.UpdateUserData,
+        payload: {
+          newData: addErrorMessage(state.userData),
+        },
+      });
+
+      dispatch({
+        type: ActionType.UpdateUserData,
+        payload: {
+          newData: addSuccessMessage(state.userData),
+        },
+      });
+    }
+  };
 
   return (
     <div id="sidebar">
       <div className="sidebar-content">
-        <StudentCard registrationCode={props.registrationCode} />
-        <Button className="submit-button" variant="contained">
+        <StudentCard />
+        <Button
+          className="submit-button"
+          variant="contained"
+          onClick={() => {
+            addStatusMessages();
+          }}
+        >
           {buttonTitle}
         </Button>
       </div>
       <hr />
       <div className="sidebar-content">
         <h2>Status Timeline</h2>
+        <StatusTimeline />
       </div>
     </div>
   );

@@ -2,16 +2,22 @@
   --primary-color: #388e3c;
   --primary-light-color: #6abf69;
   --primary-dark-color: #00600f;
+  --success-color: #1bb55c;
+  --error-color: #f44336;
 
   --default-inactive-color: #c1c1c1;
+  --default-inactive-color20: rgba(193, 193, 193, 0.2);
 
   --font-default-dark-color: #263238;
   --font-weight-semibold: 600;
 
   --margin-default: 16px;
   --margin-related-items: 8px;
+  --margin-related-text: 4px;
+  --margin-spacer: 32px;
 
   --padding-default: 16px;
+  --padding-inner-items: 8px;
 
   --header-height: 56px;
 }
@@ -21,6 +27,7 @@ body,
 #root {
   height: 100%;
   overflow: hidden;
+  color: var(--font-default-dark-color);
 }
 
 .App {

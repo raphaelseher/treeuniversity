@@ -1,19 +1,15 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import Storage, { useLocalStoredUser } from "adapters/storage";
-import IRegistrationData from "adapters/RegistrationData";
 import LinearProgress from "@mui/material/LinearProgress";
 import PlaceholderText from "components/PlaceholderText";
+import { useUserDataContext } from "context/UserDataContext";
 import "styles/StudentCard.css";
 
 // Parameters are called Props in React.
-type StudentCardProps = {
-  registrationCode: string;
-};
+type StudentCardProps = {};
 function StudentCard(props: StudentCardProps) {
-  const [userData, setUserData] = useLocalStoredUser<
-    IRegistrationData | undefined
-  >(props.registrationCode, undefined);
+  const { state, dispatch } = useUserDataContext();
+  const userData = state.userData;
 
   return (
     <Card id="student-card">

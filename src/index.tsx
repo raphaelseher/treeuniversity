@@ -4,36 +4,44 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Continue from "./pages/Continue";
 import Complete from "./pages/Complete";
-import "./styles/index.css";
 import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
+import UserDataContext from "context/UserDataContext";
+import { reducer, defaultUserData } from "reducer/userDataReducer";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { theme } from "./theme";
-import EnvironmentProvider from "context/Environment";
+import "./styles/index.css";
 
-// const [environment, setEnvironment] = environmentState;
+const Root: React.FC = () => {
+  const [state, dispatch] = React.useReducer(reducer, defaultUserData);
+  const userDataProvider = { state: state, dispatch };
+
+  return (
+    <UserDataContext.Provider value={userDataProvider}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="register" element={<Register />} />
+          <Route path="continue" element={<Continue />} />
+          <Route path="complete" element={<Complete />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>404 - There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </UserDataContext.Provider>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <EnvironmentProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="register" element={<Register />} />
-            <Route path="continue" element={<Continue />} />
-            <Route path="complete" element={<Complete />} />
-            <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>404 - There's nothing here!</p>
-                </main>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </EnvironmentProvider>
+      <Root />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
