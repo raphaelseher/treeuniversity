@@ -51,4 +51,32 @@ export const addRegistrationCodeMessage = (
   );
 };
 
+export const addErrorMessage = (userData: IRegistrationData) => {
+  return addMessage(
+    {
+      type: StatusMessageType.Submit,
+      timestamp: new Date(),
+      name: "Students Office",
+      message:
+        "You uploaded a wrong school report. Please upload a new one and submit again.",
+      isError: true,
+    },
+    userData
+  );
+};
+
+export const addSuccessMessage = (userData: IRegistrationData) => {
+  return addMessage(
+    {
+      type: StatusMessageType.Submit,
+      timestamp: new Date(),
+      name: "Students Office",
+      message:
+        "Your registration is complete. Please continue for additional information.",
+      isError: false,
+    },
+    userData
+  );
+};
+
 export default TimelineGenerator;

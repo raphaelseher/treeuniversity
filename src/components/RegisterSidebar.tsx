@@ -4,6 +4,8 @@ import StatusTimeline from "components/StatusTimeline";
 import {
   addSubmitMessage,
   addRegistrationCodeMessage,
+  addErrorMessage,
+  addSuccessMessage,
 } from "adapters/FakeTimelineGenerator";
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
@@ -15,6 +17,43 @@ function RegisterSidebar(props: RegisterSidebarProps) {
   const { state, dispatch } = useUserDataContext();
   const buttonTitle = "Submit";
 
+  const addStatusMessages = () => {
+    if (state) {
+      if (state.registrationCode) {
+        dispatch({
+          type: ActionType.UpdateUserData,
+          payload: {
+            newData: addRegistrationCodeMessage(
+              state.registrationCode,
+              state.userData
+            ),
+          },
+        });
+      }
+
+      dispatch({
+        type: ActionType.UpdateUserData,
+        payload: {
+          newData: addSubmitMessage(state.userData),
+        },
+      });
+
+      dispatch({
+        type: ActionType.UpdateUserData,
+        payload: {
+          newData: addErrorMessage(state.userData),
+        },
+      });
+
+      dispatch({
+        type: ActionType.UpdateUserData,
+        payload: {
+          newData: addSuccessMessage(state.userData),
+        },
+      });
+    }
+  };
+
   return (
     <div id="sidebar">
       <div className="sidebar-content">
@@ -23,25 +62,7 @@ function RegisterSidebar(props: RegisterSidebarProps) {
           className="submit-button"
           variant="contained"
           onClick={() => {
-            if (state) {
-              dispatch({
-                type: ActionType.UpdateUserData,
-                payload: {
-                  newData: addSubmitMessage(state.userData),
-                },
-              });
-              if (state.registrationCode) {
-                dispatch({
-                  type: ActionType.UpdateUserData,
-                  payload: {
-                    newData: addRegistrationCodeMessage(
-                      state.registrationCode,
-                      state.userData
-                    ),
-                  },
-                });
-              }
-            }
+            addStatusMessages();
           }}
         >
           {buttonTitle}
