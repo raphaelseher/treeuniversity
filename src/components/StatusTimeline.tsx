@@ -16,7 +16,9 @@ function StatusTimeline(props: StatusTimelineProps) {
       return "now";
     } else if (hDiff < 1) {
       // return date in minutes
-      return (hDiff * 60).toFixed(0) + " minutes";
+      return (hDiff * 60).toFixed(0) + " minutes ago";
+    } else if (hDiff < 24) {
+      return hDiff.toFixed(0) + " hours ago";
     }
 
     return date.toLocaleDateString();
