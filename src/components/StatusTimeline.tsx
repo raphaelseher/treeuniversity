@@ -1,44 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Storage, { useLocalStoredUser } from "adapters/storage";
 import IRegistrationData from "adapters/RegistrationData";
 import StatusTimelineMessage from "./StatusTimelineMessage";
-import "styles/StatusTimelineMessage.css";
+import "styles/StatusTimeline.css";
+import { EnvironmentConsumer } from "context/Environment";
 
 interface StatusTimelineProps {
   registrationCode: string;
 }
 
 function StatusTimeline(props: StatusTimelineProps) {
-  const [userData, setUserData] = useLocalStoredUser<
+  const [userData, setUserData, test] = useLocalStoredUser<
     IRegistrationData | undefined
   >(props.registrationCode, undefined);
 
+  const messageComponents = userData?.statusMessages.map((message) => {
+    return (
+      <StatusTimelineMessage
+        data={{
+          timeLabel: message.timestamp.toString(),
+          text: message.message,
+          name: message.name,
+          isError: message.isError,
+        }}
+      />
+    );
+  });
+  console.log(messageComponents);
+
   return (
-    <div id="status-timeline">
-      <StatusTimelineMessage
-        data={{
-          timeLabel: "2 hours",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ju",
-          name: "Student Office",
-          isError: true,
-        }}
-      />
-      <StatusTimelineMessage
-        data={{
-          timeLabel: "2 hours",
-          text: "lLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ju",
-          name: "Student Office",
-          isError: false,
-        }}
-      />
-      <StatusTimelineMessage
-        data={{
-          timeLabel: "2 hours",
-          text: "Content",
-          isError: false,
-        }}
-      />
-    </div>
+    <EnvironmentConsumer>
+      {([environment, _]) => (
+        <div id="status-timeline">
+          {environment.registrationCode}
+          {userData?.statusMessages.map((message) => {
+            return (
+              <StatusTimelineMessage
+                data={{
+                  timeLabel: message.timestamp.toString(),
+                  text: message.message,
+                  name: message.name,
+                  isError: message.isError,
+                }}
+              />
+            );
+          })}
+        </div>
+      )}
+    </EnvironmentConsumer>
   );
 }
 

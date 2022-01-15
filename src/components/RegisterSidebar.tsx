@@ -5,6 +5,7 @@ import StudentCard from "components/StudentCard";
 import Button from "@mui/material/Button";
 import StatusTimeline from "components/StatusTimeline";
 import "styles/RegisterSidebar.css";
+import { addSubmitMessage } from "adapters/FakeTimelineGenerator";
 
 interface RegisterSidebarProps {
   registrationCode: string;
@@ -21,7 +22,13 @@ function RegisterSidebar(props: RegisterSidebarProps) {
     <div id="sidebar">
       <div className="sidebar-content">
         <StudentCard registrationCode={props.registrationCode} />
-        <Button className="submit-button" variant="contained">
+        <Button
+          className="submit-button"
+          variant="contained"
+          onClick={() => {
+            addSubmitMessage([userData, setUserData]);
+          }}
+        >
           {buttonTitle}
         </Button>
       </div>
