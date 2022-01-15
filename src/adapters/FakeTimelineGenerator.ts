@@ -1,4 +1,3 @@
-import storage, { useLocalStoredUser } from "adapters/storage";
 import IRegistrationData, {
   IStatusMessage,
   StatusMessageType,

@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Storage, { useLocalStoredUser } from "adapters/storage";
-import IRegistrationData from "adapters/RegistrationData";
 import StatusTimelineMessage from "./StatusTimelineMessage";
 import "styles/StatusTimeline.css";
-import { EnvironmentConsumer } from "context/Environment";
 import { useUserDataContext } from "context/UserDataContext";
 
 interface StatusTimelineProps {}

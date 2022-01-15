@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import IRegistrationData from "adapters/RegistrationData";
-import { useLocalStoredUser } from "adapters/storage";
 
 interface RegisterFormProps {}
 

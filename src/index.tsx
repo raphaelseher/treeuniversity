@@ -6,12 +6,10 @@ import Continue from "./pages/Continue";
 import Complete from "./pages/Complete";
 import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import { theme } from "./theme";
-import EnvironmentProvider from "context/Environment";
 import UserDataContext from "context/UserDataContext";
 import { reducer, defaultUserData } from "reducer/userDataReducer";
-import IRegistrationData from "adapters/RegistrationData";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { theme } from "./theme";
 import "./styles/index.css";
 
 const Root: React.FC = () => {
@@ -43,9 +41,7 @@ const Root: React.FC = () => {
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <EnvironmentProvider>
-        <Root />
-      </EnvironmentProvider>
+      <Root />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
