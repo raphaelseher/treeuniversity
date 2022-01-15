@@ -26,10 +26,11 @@ function StatusTimeline(props: StatusTimelineProps) {
     <div id="status-timeline">
       {state?.userData.statusMessages
         .sort((lhs, rhs) => lhs.timestamp.valueOf() - rhs.timestamp.valueOf())
-        .map((message) => {
+        .map((message, index) => {
           const dateString = formatDate(message.timestamp);
           return (
             <StatusTimelineMessage
+              key={index}
               data={{
                 timeLabel: dateString,
                 text: message.message,
