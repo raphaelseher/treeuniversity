@@ -36,7 +36,7 @@ function App() {
       <div style={{ marginTop: "16px" }}>
         <TextField
           variant="outlined"
-          label="Vorame"
+          label="Vorname"
           type="name"
           value={userData.firstname}
           onChange={(e) => {
