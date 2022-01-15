@@ -1,7 +1,10 @@
 import StudentCard from "components/StudentCard";
 import Button from "@mui/material/Button";
 import StatusTimeline from "components/StatusTimeline";
-import { addSubmitMessage } from "adapters/FakeTimelineGenerator";
+import {
+  addSubmitMessage,
+  addRegistrationCodeMessage,
+} from "adapters/FakeTimelineGenerator";
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
 import "styles/RegisterSidebar.css";
@@ -27,6 +30,17 @@ function RegisterSidebar(props: RegisterSidebarProps) {
                   newData: addSubmitMessage(state.userData),
                 },
               });
+              if (state.registrationCode) {
+                dispatch({
+                  type: ActionType.UpdateUserData,
+                  payload: {
+                    newData: addRegistrationCodeMessage(
+                      state.registrationCode,
+                      state.userData
+                    ),
+                  },
+                });
+              }
             }
           }}
         >
