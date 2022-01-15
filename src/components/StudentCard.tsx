@@ -41,7 +41,6 @@ function StudentCard(props: StudentCardProps) {
         return sum + number;
       });
 
-    console.log(`Progress ${progress}`);
     return progress;
   };
   return (
@@ -104,7 +103,7 @@ function StudentCard(props: StudentCardProps) {
       </div>
       <LinearProgress
         className="progress"
-        variant="buffer"
+        variant="determinate"
         value={calculateProgress()}
       />
     </Card>
