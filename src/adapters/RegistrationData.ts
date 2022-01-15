@@ -21,7 +21,11 @@ interface IRegistrationData {
   studySubject?: string;
   image?: string; // base64 encoded
   validUntil?: string; // fixed date for end of summer semester
-  statusMessages: [IStatusMessage];
+  statusMessages: IStatusMessage[];
 }
+
+export type Action = {
+  newData: IRegistrationData;
+};
 
 export default IRegistrationData;

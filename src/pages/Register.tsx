@@ -3,31 +3,30 @@ import { EnvironmentConsumer, IEnvironment } from "context/Environment";
 import Header from "components/Header";
 import RegisterForm from "components/RegisterForm";
 import RegisterSidebar from "components/RegisterSidebar";
+import { useUserDataContext } from "context/UserDataContext";
 import "styles/Register.css";
 
 function Register() {
-  const renderData = (environment: IEnvironment) => {
-    if (!environment.registrationCode) {
+  const { state, dispatch } = useUserDataContext();
+
+  const renderData = () => {
+    if (!state.registrationCode) {
       return <p>Error: No Registration Code.</p>;
     } else {
       return (
         <div id="content">
-          <RegisterForm registrationCode={environment.registrationCode} />
-          <RegisterSidebar registrationCode={environment.registrationCode} />
+          <RegisterForm />
+          <RegisterSidebar />
         </div>
       );
     }
   };
 
   return (
-    <EnvironmentConsumer>
-      {([environment, _]) => (
-        <div id="register-page">
-          <Header registrationCode={environment.registrationCode} />
-          {renderData(environment)}
-        </div>
-      )}
-    </EnvironmentConsumer>
+    <div id="register-page">
+      <Header showRegistrationCode={true} />
+      {renderData()}
+    </div>
   );
 }
 

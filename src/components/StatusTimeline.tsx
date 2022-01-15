@@ -4,50 +4,28 @@ import IRegistrationData from "adapters/RegistrationData";
 import StatusTimelineMessage from "./StatusTimelineMessage";
 import "styles/StatusTimeline.css";
 import { EnvironmentConsumer } from "context/Environment";
+import { useUserDataContext } from "context/UserDataContext";
 
-interface StatusTimelineProps {
-  registrationCode: string;
-}
+interface StatusTimelineProps {}
 
 function StatusTimeline(props: StatusTimelineProps) {
-  const [userData, setUserData, test] = useLocalStoredUser<
-    IRegistrationData | undefined
-  >(props.registrationCode, undefined);
-
-  const messageComponents = userData?.statusMessages.map((message) => {
-    return (
-      <StatusTimelineMessage
-        data={{
-          timeLabel: message.timestamp.toString(),
-          text: message.message,
-          name: message.name,
-          isError: message.isError,
-        }}
-      />
-    );
-  });
-  console.log(messageComponents);
+  const { state, dispatch } = useUserDataContext();
 
   return (
-    <EnvironmentConsumer>
-      {([environment, _]) => (
-        <div id="status-timeline">
-          {environment.registrationCode}
-          {userData?.statusMessages.map((message) => {
-            return (
-              <StatusTimelineMessage
-                data={{
-                  timeLabel: message.timestamp.toString(),
-                  text: message.message,
-                  name: message.name,
-                  isError: message.isError,
-                }}
-              />
-            );
-          })}
-        </div>
-      )}
-    </EnvironmentConsumer>
+    <div id="status-timeline">
+      {state?.userData.statusMessages.map((message) => {
+        return (
+          <StatusTimelineMessage
+            data={{
+              timeLabel: message.timestamp.toString(),
+              text: message.message,
+              name: message.name,
+              isError: message.isError,
+            }}
+          />
+        );
+      })}
+    </div>
   );
 }
 

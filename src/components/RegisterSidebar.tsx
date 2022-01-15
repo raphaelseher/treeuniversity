@@ -1,32 +1,33 @@
-import React, { useState } from "react";
-import IRegistrationData from "adapters/RegistrationData";
-import { useLocalStoredUser } from "adapters/storage";
 import StudentCard from "components/StudentCard";
 import Button from "@mui/material/Button";
 import StatusTimeline from "components/StatusTimeline";
-import "styles/RegisterSidebar.css";
 import { addSubmitMessage } from "adapters/FakeTimelineGenerator";
+import { useUserDataContext } from "context/UserDataContext";
+import { ActionType } from "reducer/userDataReducer";
+import "styles/RegisterSidebar.css";
 
-interface RegisterSidebarProps {
-  registrationCode: string;
-}
+interface RegisterSidebarProps {}
 
 function RegisterSidebar(props: RegisterSidebarProps) {
-  const [userData, setUserData] = useLocalStoredUser<
-    IRegistrationData | undefined
-  >(props.registrationCode, undefined);
-
+  const { state, dispatch } = useUserDataContext();
   const buttonTitle = "Submit";
 
   return (
     <div id="sidebar">
       <div className="sidebar-content">
-        <StudentCard registrationCode={props.registrationCode} />
+        <StudentCard />
         <Button
           className="submit-button"
           variant="contained"
           onClick={() => {
-            addSubmitMessage([userData, setUserData]);
+            if (state) {
+              dispatch({
+                type: ActionType.UpdateUserData,
+                payload: {
+                  newData: addSubmitMessage(state.userData),
+                },
+              });
+            }
           }}
         >
           {buttonTitle}
@@ -35,7 +36,7 @@ function RegisterSidebar(props: RegisterSidebarProps) {
       <hr />
       <div className="sidebar-content">
         <h2>Status Timeline</h2>
-        <StatusTimeline registrationCode={props.registrationCode} />
+        <StatusTimeline />
       </div>
     </div>
   );

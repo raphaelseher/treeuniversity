@@ -6,18 +6,7 @@ import IRegistrationData, {
 
 class TimelineGenerator {}
 
-export const addSubmitMessage = (
-  data: [
-    userData: IRegistrationData | undefined,
-    setUserData: (value: IRegistrationData) => void
-  ]
-) => {
-  const [userData, setUserData] = data;
-
-  if (!userData) {
-    return;
-  }
-
+export const addSubmitMessage = (userData: IRegistrationData) => {
   const message: IStatusMessage = {
     type: StatusMessageType.Submit,
     timestamp: new Date(),
@@ -29,10 +18,7 @@ export const addSubmitMessage = (
   const messages = userData.statusMessages;
   messages.push(message);
 
-  setUserData({
-    ...userData,
-    statusMessages: messages,
-  });
+  return { ...userData, statusMessages: messages };
 };
 
 export default TimelineGenerator;

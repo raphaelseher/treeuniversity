@@ -6,9 +6,7 @@ import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 import Header from "components/Header";
 import "styles/App.css";
-import Storage, { useLocalStoredUser } from "adapters/storage";
 import IRegistrationData from "adapters/RegistrationData";
-import { EnvironmentConsumer, IEnvironment } from "context/Environment";
 
 function App() {
   useEffect(() => {
@@ -20,9 +18,6 @@ function App() {
   const registrationCode = "1";
   // Saving our data to the browsers local storage. This works like `useState`.
   // userData is the data to use in the component. setUserData used to change the values.
-  const [userData, setUserData] = useLocalStoredUser<
-    IRegistrationData | undefined
-  >(registrationCode, undefined);
 
   // regex used for validation of input
   const nameRegex = new RegExp("^([ \u00c0-\u01ffa-zA-Z'-])+$");
@@ -68,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header registrationCode={undefined} />
+      <Header showRegistrationCode={false} />
       <header className="App-header">
         <h1>Treeuniversity</h1>
         <Link to="/register">
