@@ -11,6 +11,38 @@ function StudentCard(props: StudentCardProps) {
   const { state, dispatch } = useUserDataContext();
   const userData = state.userData;
 
+  const calculateProgress = () => {
+    const step1 = [
+      state.userData.firstname,
+      state.userData.lastname,
+      state.userData.birthDate,
+      state.userData.svnr,
+      state.userData.placeOfBirth,
+      state.userData.plz,
+      state.userData.town,
+      state.userData.street,
+      state.userData.streetNumber,
+      state.userData.phone,
+      state.userData.email,
+    ];
+    const step2 = [state.userData.image];
+    const step3 = [state.userData.faculty, state.userData.studySubject];
+    const step4 = [
+      state.userData.proofOfCitizinship,
+      state.userData.entranceQualification,
+    ];
+
+    const progress = [step1, step2, step3, step4]
+      .map<number>((arr) => {
+        // do not add to progres, if undefined or empty in userData group
+        return arr.filter((item) => item).length > 0 ? 0 : 25;
+      })
+      .reduce((sum, number) => {
+        return sum + number;
+      });
+
+    return progress;
+  };
   return (
     <Card id="student-card">
       <div className="card-header flex-row">
@@ -69,7 +101,11 @@ function StudentCard(props: StudentCardProps) {
           />
         </div>
       </div>
-      <LinearProgress className="progress" variant="buffer" value={20} />
+      <LinearProgress
+        className="progress"
+        variant="determinate"
+        value={calculateProgress()}
+      />
     </Card>
   );
 }
