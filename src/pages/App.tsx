@@ -65,16 +65,23 @@ function App() {
     );
   }
 
-  // this returns the "JSX"
-  // JSX is like HTML with extra javascript injected code if needed
-
   const navigate = useNavigate();
   const didClickRegister = () => {
     // TODO: Generate Registration ID and save empty data in localstore for it.
+    // atm I just set it to 1 for testing
+    dispatch({
+      type: ActionType.UpdateRegistrationCode,
+      payload: {
+        newCode: "1",
+      },
+    });
+
     // Send user to register page
     navigate("/register");
   };
 
+  // this returns the "JSX"
+  // JSX is like HTML with extra javascript injected code if needed
   return (
     <div className="App">
       <Header showRegistrationCode={false} />
