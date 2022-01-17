@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
@@ -68,14 +68,26 @@ function App() {
   // this returns the "JSX"
   // JSX is like HTML with extra javascript injected code if needed
 
+  const navigate = useNavigate();
+  const didClickRegister = () => {
+    // TODO: Generate Registration ID and save empty data in localstore for it.
+    // Send user to register page
+    navigate("/register");
+  };
+
   return (
     <div className="App">
       <Header showRegistrationCode={false} />
       <header className="App-header">
         <h1>Treeuniversity</h1>
-        <Link to="/register">
-          <Button variant="contained">Register</Button>
-        </Link>
+        <Button
+          variant="contained"
+          onClick={() => {
+            didClickRegister();
+          }}
+        >
+          Register
+        </Button>
         <Link to="/continue">
           <Button variant="outlined">ContinueRegistration</Button>
         </Link>
