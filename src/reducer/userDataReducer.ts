@@ -14,20 +14,30 @@ interface UpdateRegistrationCodeAction {
   newCode: string;
 }
 
+interface CreateUserDataAction {}
+
 export enum ActionType {
+  CreateUserData,
   UpdateUserData,
   UpdateRegistrationCode,
 }
 
 export type Action = {
   type: ActionType;
-  payload: UpdateUserDataAction | UpdateRegistrationCodeAction;
+  payload:
+    | UpdateUserDataAction
+    | UpdateRegistrationCodeAction
+    | CreateUserDataAction;
 };
 
 export const reducer = (state: State, action: Action): State => {
   // normally we would reduce with a switch and different actions. For now this should work.
 
   switch (action.type) {
+    case ActionType.CreateUserData:
+      const code = Storage.createNewEntry();
+      return { registrationCode: code, userData: Storage.dataFor(code) };
+
     case ActionType.UpdateRegistrationCode:
       const newCode = (action.payload as UpdateRegistrationCodeAction).newCode;
       const data = Storage.dataFor(newCode);

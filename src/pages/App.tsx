@@ -67,13 +67,9 @@ function App() {
 
   const navigate = useNavigate();
   const didClickRegister = () => {
-    // TODO: Generate Registration ID and save empty data in localstore for it.
-    // atm I just set it to 1 for testing
     dispatch({
-      type: ActionType.UpdateRegistrationCode,
-      payload: {
-        newCode: "1",
-      },
+      type: ActionType.CreateUserData,
+      payload: {},
     });
 
     // Send user to register page

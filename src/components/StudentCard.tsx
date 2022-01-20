@@ -35,7 +35,7 @@ function StudentCard(props: StudentCardProps) {
     const progress = [step1, step2, step3, step4]
       .map<number>((arr) => {
         // do not add to progres, if undefined or empty in userData group
-        return arr.filter((item) => item).length > 0 ? 0 : 25;
+        return arr.filter((item) => item).length > 0 ? 25 : 0;
       })
       .reduce((sum, number) => {
         return sum + number;
