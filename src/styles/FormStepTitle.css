@@ -3,4 +3,10 @@
   flex-direction: row;
   align-items: center;
   gap: var(--margin-default);
+  margin-top: var(--margin-spacer);
+  margin-bottom: var(--margin-spacer);
+}
+
+.step-title h2 {
+  margin: 0;
 }
