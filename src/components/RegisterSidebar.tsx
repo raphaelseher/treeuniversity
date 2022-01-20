@@ -19,18 +19,6 @@ function RegisterSidebar(props: RegisterSidebarProps) {
 
   const addStatusMessages = () => {
     if (state) {
-      if (state.registrationCode) {
-        dispatch({
-          type: ActionType.UpdateUserData,
-          payload: {
-            newData: addRegistrationCodeMessage(
-              state.registrationCode,
-              state.userData
-            ),
-          },
-        });
-      }
-
       dispatch({
         type: ActionType.UpdateUserData,
         payload: {

@@ -1,5 +1,6 @@
 import IRegistrationData from "adapters/RegistrationData";
 import Storage from "adapters/storage";
+import { addRegistrationCodeMessage } from "adapters/FakeTimelineGenerator";
 
 export interface State {
   registrationCode: string;
@@ -36,7 +37,11 @@ export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.CreateUserData:
       const code = Storage.createNewEntry();
-      return { registrationCode: code, userData: Storage.dataFor(code) };
+      const createdData = addRegistrationCodeMessage(
+        code,
+        Storage.dataFor(code)
+      );
+      return { registrationCode: code, userData: createdData };
 
     case ActionType.UpdateRegistrationCode:
       const newCode = (action.payload as UpdateRegistrationCodeAction).newCode;
