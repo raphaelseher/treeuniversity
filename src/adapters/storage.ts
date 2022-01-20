@@ -1,3 +1,4 @@
+import { SetStateAction, useState } from "react";
 var store = require("store");
 
 abstract class Storage {
@@ -33,6 +34,36 @@ abstract class Storage {
     });
     store.set("2", { firstname: "Pavel" });
     store.set("3", { firstname: "Phillipp" });
+  }
+
+  // create new registraionCode and add empty data for user
+  public static createNewEntry(): string {
+    const registraionCode = (
+      Math.floor(Math.random() * 90000) + 10000
+    ).toString();
+
+    store.set(registraionCode, {
+      firstname: undefined,
+      lastname: undefined,
+      birthDate: undefined,
+      svnr: undefined,
+      placeOfBirth: undefined,
+      plz: undefined,
+      town: undefined,
+      street: undefined,
+      streetNumber: undefined,
+      phone: undefined,
+      email: undefined,
+      validUntil: undefined,
+      image: undefined,
+      faculty: undefined,
+      studySubject: undefined,
+      proofOfCitizinship: undefined, // base64 encoded
+      entranceQualification: undefined, // base64 encoded
+      statusMessages: [],
+    });
+
+    return registraionCode;
   }
 }
 
