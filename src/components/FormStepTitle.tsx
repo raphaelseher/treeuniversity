@@ -1,3 +1,4 @@
+import IRegistrationData from "adapters/RegistrationData";
 import { useUserDataContext } from "context/UserDataContext";
 import "styles/FormStepTitle.css";
 
@@ -53,28 +54,34 @@ function FormStepTitle(props: FormStepTitleProps) {
         break;
     }
 
-    const progress = stepsArrays
-      .map<boolean>((arr) => {
-        return arr.filter((item) => item).length > 0;
-      })
-      .reduce((result, bool) => {
+    const isComplete = stepsArrays.map((arr) => {
+      const itemsValid = arr
+        .map((item) => item ?? "")
+        .map((item) => item.length > 0);
+      return itemsValid.reduce((result, bool) => {
         return result && bool;
       });
+    });
 
-    return progress;
+    return isComplete.reduce((result, bool) => {
+      return result && bool;
+    });
   };
 
   return (
     <div className={"step-title step" + props.step}>
       <h2>{props.title}</h2>
-      {isStepComplete(props.step) && (
-        <img
-          width="32px"
-          height="32px"
-          className="done-icon"
-          src={process.env.PUBLIC_URL + "/image/done-circle.svg"}
-        />
-      )}
+
+      <div className="image-wrapper">
+        {isStepComplete(props.step) && (
+          <img
+            width="32px"
+            height="32px"
+            className="done-icon"
+            src={process.env.PUBLIC_URL + "/image/done-circle.svg"}
+          />
+        )}
+      </div>
     </div>
   );
 }

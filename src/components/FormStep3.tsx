@@ -14,10 +14,10 @@ function FormStep3() {
     ["", []],
     [
       "Information Sciences",
-      ["Applied Informatics", "Telematic", "Business Informatics"],
+      ["", "Applied Informatics", "Telematic", "Business Informatics"],
     ],
-    ["Culture Sciences", ["History", "Media & Communications"]],
-    ["Business Sciences", ["Business Economics"]],
+    ["Culture Sciences", ["", "History", "Media & Communications"]],
+    ["Business Sciences", ["", "Business Economics"]],
   ]);
 
   return (
