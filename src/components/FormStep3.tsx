@@ -12,7 +12,12 @@ function FormStep3() {
 
   const optionsMap = new Map<string, string[]>([
     ["", []],
-    ["Informatics", ["Applied Informatic", "Telematic", "Business Informatic"]],
+    [
+      "Information Sciences",
+      ["Applied Informatics", "Telematic", "Business Informatics"],
+    ],
+    ["Culture Sciences", ["History", "Media & Communications"]],
+    ["Business Sciences", ["Business Economics"]],
   ]);
 
   return (
@@ -26,7 +31,11 @@ function FormStep3() {
             dispatch({
               type: ActionType.UpdateUserData,
               payload: {
-                newData: { ...userData, faculty: newValue },
+                newData: {
+                  ...userData,
+                  faculty: newValue,
+                  studySubject: undefined,
+                },
               },
             });
           }}
@@ -38,7 +47,7 @@ function FormStep3() {
 
         <Autocomplete
           disablePortal
-          disabled={userData?.faculty === undefined}
+          disabled={!userData.faculty}
           value={userData?.studySubject ?? ""}
           onChange={(e, newValue) => {
             dispatch({
