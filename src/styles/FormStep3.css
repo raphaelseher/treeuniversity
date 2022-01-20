@@ -1,0 +1,5 @@
+#step3-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-default);
+}

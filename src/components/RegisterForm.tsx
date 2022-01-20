@@ -1,6 +1,7 @@
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
 import TextField from "@mui/material/TextField";
+import FormStep3 from "components/FormStep3";
 
 interface RegisterFormProps {}
 
@@ -40,6 +41,8 @@ function RegisterForm(props: RegisterFormProps) {
         helperText={isNameValid ? undefined : "Keine Sonderzeichen verwenden"}
         error={!isNameValid}
       />
+
+      <FormStep3 />
     </div>
   );
 }

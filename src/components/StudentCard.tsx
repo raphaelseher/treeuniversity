@@ -32,17 +32,22 @@ function StudentCard(props: StudentCardProps) {
       state.userData.entranceQualification,
     ];
 
-    const progress = [step1, step2, step3, step4]
-      .map<number>((arr) => {
-        // do not add to progres, if undefined or empty in userData group
-        return arr.filter((item) => item).length > 0 ? 25 : 0;
-      })
-      .reduce((sum, number) => {
-        return sum + number;
+    const isComplete = [step1, step2, step3, step4].map((arr) => {
+      const itemsValid = arr
+        .map((item) => item ?? "")
+        .map((item) => item.length > 0);
+      return itemsValid.reduce((result, bool) => {
+        return result && bool;
       });
+    });
 
-    return progress;
+    return isComplete
+      .map<number>((item) => (item ? 25 : 0))
+      .reduce((result, val) => {
+        return result + val;
+      });
   };
+
   return (
     <Card id="student-card">
       <div className="card-header flex-row">
@@ -61,7 +66,7 @@ function StudentCard(props: StudentCardProps) {
               width="82px"
               height="82px"
               className="user-image"
-              src={"data:image/png;base64," + userData?.image}
+              src={userData?.image && "data:image/png;base64," + userData.image}
             />
           </div>
           <div className="name-content">

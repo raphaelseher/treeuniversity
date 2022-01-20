@@ -1,0 +1,17 @@
+.step-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--margin-default);
+  margin-top: var(--margin-spacer);
+  margin-bottom: var(--margin-spacer);
+}
+
+.step-title .image-wrapper {
+  width: 32px;
+  height: 32px;
+}
+
+.step-title h2 {
+  margin: 0;
+}
