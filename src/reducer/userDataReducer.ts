@@ -1,6 +1,15 @@
-import IRegistrationData from "adapters/RegistrationData";
+import IRegistrationData, {
+  StatusMessageType,
+} from "adapters/RegistrationData";
 import Storage from "adapters/storage";
-import { addRegistrationCodeMessage } from "adapters/FakeTimelineGenerator";
+import {
+  addSubmitMessage,
+  addRegistrationCodeMessage,
+  addErrorMessage,
+  addSuccessMessage,
+  addProgressErrorMessage,
+} from "adapters/FakeTimelineGenerator";
+import Progress from "helper/progress";
 
 export interface State {
   registrationCode: string;
@@ -21,6 +30,7 @@ export enum ActionType {
   CreateUserData,
   UpdateUserData,
   UpdateRegistrationCode,
+  UpdateSubmitState,
 }
 
 export type Action = {
@@ -32,8 +42,6 @@ export type Action = {
 };
 
 export const reducer = (state: State, action: Action): State => {
-  // normally we would reduce with a switch and different actions. For now this should work.
-
   switch (action.type) {
     case ActionType.CreateUserData:
       const code = Storage.createNewEntry();
@@ -54,10 +62,35 @@ export const reducer = (state: State, action: Action): State => {
         Storage.setdata(state.registrationCode, newUserData);
       } else {
         console.log(
-          "[UserDataReducer] No registrationCode set. Cannto save to localstore."
+          "[UserDataReducer] No registrationCode set. Cannot save to localstore."
         );
       }
       return { ...state, userData: newUserData };
+
+    case ActionType.UpdateSubmitState:
+      // first, only works when finishes -> 100% progress
+      if (Progress.calculateProgress(state.userData) < 100) {
+        console.log(
+          "[UserDataReducer] User cannot submit, not completely filled form."
+        );
+
+        return { ...state, userData: addProgressErrorMessage(state.userData) };
+      }
+
+      // second step, show wrong uploaded file
+      var newUserDataWithMessages = addSubmitMessage(state.userData);
+
+      const hasRequestMessage = state.userData.statusMessages.some(
+        (message) => message.type == StatusMessageType.Request
+      );
+      console.log(state.userData.statusMessages);
+      if (!hasRequestMessage) {
+        newUserDataWithMessages = addErrorMessage(newUserDataWithMessages);
+      } else {
+        newUserDataWithMessages = addSuccessMessage(newUserDataWithMessages);
+      }
+
+      return { ...state, userData: newUserDataWithMessages };
 
     default:
       return state;

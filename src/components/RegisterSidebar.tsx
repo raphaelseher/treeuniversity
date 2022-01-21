@@ -1,45 +1,28 @@
 import StudentCard from "components/StudentCard";
 import Button from "@mui/material/Button";
 import StatusTimeline from "components/StatusTimeline";
-import {
-  addSubmitMessage,
-  addRegistrationCodeMessage,
-  addErrorMessage,
-  addSuccessMessage,
-} from "adapters/FakeTimelineGenerator";
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
+import { useNavigate } from "react-router-dom";
+import Progress from "helper/progress";
 import "styles/RegisterSidebar.css";
 
 interface RegisterSidebarProps {}
 
 function RegisterSidebar(props: RegisterSidebarProps) {
   const { state, dispatch } = useUserDataContext();
-  const buttonTitle = "Submit";
+  const navigate = useNavigate();
 
-  const addStatusMessages = () => {
-    if (state) {
-      dispatch({
-        type: ActionType.UpdateUserData,
-        payload: {
-          newData: addSubmitMessage(state.userData),
-        },
-      });
+  const isEnrolled = Progress.isEnrolled(state.userData);
+  const buttonTitle = isEnrolled ? "Finish Enrollment" : "Submit";
 
-      dispatch({
-        type: ActionType.UpdateUserData,
-        payload: {
-          newData: addErrorMessage(state.userData),
-        },
-      });
-
-      dispatch({
-        type: ActionType.UpdateUserData,
-        payload: {
-          newData: addSuccessMessage(state.userData),
-        },
-      });
+  const onSubmit = () => {
+    if (isEnrolled) {
+      navigate("/complete");
+      return;
     }
+
+    dispatch({ type: ActionType.UpdateSubmitState, payload: {} });
   };
 
   return (
@@ -50,7 +33,7 @@ function RegisterSidebar(props: RegisterSidebarProps) {
           className="submit-button"
           variant="contained"
           onClick={() => {
-            addStatusMessages();
+            onSubmit();
           }}
         >
           {buttonTitle}

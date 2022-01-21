@@ -54,7 +54,7 @@ export const addRegistrationCodeMessage = (
 export const addErrorMessage = (userData: IRegistrationData) => {
   return addMessage(
     {
-      type: StatusMessageType.Submit,
+      type: StatusMessageType.Request,
       timestamp: new Date(),
       name: "Students Office",
       message:
@@ -65,10 +65,28 @@ export const addErrorMessage = (userData: IRegistrationData) => {
   );
 };
 
+export const addProgressErrorMessage = (
+  userData: IRegistrationData,
+  message?: string
+) => {
+  return addMessage(
+    {
+      type: StatusMessageType.Request,
+      timestamp: new Date(),
+      name: "System",
+      message:
+        message ??
+        "Not all required data is submitted. Please verify and add missing required data.",
+      isError: true,
+    },
+    userData
+  );
+};
+
 export const addSuccessMessage = (userData: IRegistrationData) => {
   return addMessage(
     {
-      type: StatusMessageType.Submit,
+      type: StatusMessageType.Finish,
       timestamp: new Date(),
       name: "Students Office",
       message:

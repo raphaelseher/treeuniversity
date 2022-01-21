@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import LinearProgress from "@mui/material/LinearProgress";
 import PlaceholderText from "components/PlaceholderText";
 import { useUserDataContext } from "context/UserDataContext";
+import Progress from "helper/progress";
 import "styles/StudentCard.css";
 
 // Parameters are called Props in React.
@@ -10,43 +11,6 @@ type StudentCardProps = {};
 function StudentCard(props: StudentCardProps) {
   const { state, dispatch } = useUserDataContext();
   const userData = state.userData;
-
-  const calculateProgress = () => {
-    const step1 = [
-      state.userData.firstname,
-      state.userData.lastname,
-      state.userData.birthDate,
-      state.userData.svnr,
-      state.userData.placeOfBirth,
-      state.userData.plz,
-      state.userData.town,
-      state.userData.street,
-      state.userData.streetNumber,
-      state.userData.phone,
-      state.userData.email,
-    ];
-    const step2 = [state.userData.image];
-    const step3 = [state.userData.faculty, state.userData.studySubject];
-    const step4 = [
-      state.userData.proofOfCitizinship,
-      state.userData.entranceQualification,
-    ];
-
-    const isComplete = [step1, step2, step3, step4].map((arr) => {
-      const itemsValid = arr
-        .map((item) => item ?? "")
-        .map((item) => item.length > 0);
-      return itemsValid.reduce((result, bool) => {
-        return result && bool;
-      });
-    });
-
-    return isComplete
-      .map<number>((item) => (item ? 25 : 0))
-      .reduce((result, val) => {
-        return result + val;
-      });
-  };
 
   return (
     <Card id="student-card">
@@ -109,7 +73,7 @@ function StudentCard(props: StudentCardProps) {
       <LinearProgress
         className="progress"
         variant="determinate"
-        value={calculateProgress()}
+        value={Progress.calculateProgress(userData)}
       />
     </Card>
   );
