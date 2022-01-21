@@ -54,7 +54,7 @@ export const addRegistrationCodeMessage = (
 export const addErrorMessage = (userData: IRegistrationData) => {
   return addMessage(
     {
-      type: StatusMessageType.Submit,
+      type: StatusMessageType.Request,
       timestamp: new Date(),
       name: "Students Office",
       message:
@@ -68,7 +68,7 @@ export const addErrorMessage = (userData: IRegistrationData) => {
 export const addSuccessMessage = (userData: IRegistrationData) => {
   return addMessage(
     {
-      type: StatusMessageType.Submit,
+      type: StatusMessageType.Finish,
       timestamp: new Date(),
       name: "Students Office",
       message:
