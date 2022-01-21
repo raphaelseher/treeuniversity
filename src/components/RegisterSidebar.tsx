@@ -3,15 +3,25 @@ import Button from "@mui/material/Button";
 import StatusTimeline from "components/StatusTimeline";
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
+import { useNavigate } from "react-router-dom";
+import Progress from "helper/progress";
 import "styles/RegisterSidebar.css";
 
 interface RegisterSidebarProps {}
 
 function RegisterSidebar(props: RegisterSidebarProps) {
   const { state, dispatch } = useUserDataContext();
-  const buttonTitle = "Submit";
+  const navigate = useNavigate();
+
+  const isEnrolled = Progress.isEnrolled(state.userData);
+  const buttonTitle = isEnrolled ? "Finish Enrollment" : "Submit";
 
   const onSubmit = () => {
+    if (isEnrolled) {
+      navigate("/complete");
+      return;
+    }
+
     dispatch({ type: ActionType.UpdateSubmitState, payload: {} });
   };
 

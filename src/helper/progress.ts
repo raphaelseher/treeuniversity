@@ -1,4 +1,6 @@
-import IRegistrationData from "adapters/RegistrationData";
+import IRegistrationData, {
+  StatusMessageType,
+} from "adapters/RegistrationData";
 
 export enum Step {
   Step1 = 1,
@@ -8,6 +10,23 @@ export enum Step {
 }
 
 class Progress {
+  static isEnrolled = (userData: IRegistrationData): boolean => {
+    const progress = Progress.calculateProgress(userData);
+    const finishedMessage = userData.statusMessages.some(
+      (message) => message.type == StatusMessageType.Finish
+    );
+
+    if (progress < 100) {
+      console.log("[Progress.isEnrolled] Progress is not 100%.");
+    }
+
+    if (!finishedMessage) {
+      console.log("[Progress.isEnrolled] User got no Finished message.");
+    }
+
+    return progress >= 100 && finishedMessage;
+  };
+
   static calculateProgress = (userData: IRegistrationData) => {
     const isComplete = this.getStepArray(userData, [
       Step.Step1,
