@@ -1,8 +1,8 @@
 import { useUserDataContext } from "context/UserDataContext";
-import FormStepTitle, { Step } from "components/FormStepTitle";
+import FormStepTitle from "components/FormStepTitle";
+import { Step } from "helper/progress";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
 import { ActionType } from "reducer/userDataReducer";
 import "styles/FormStep3.css";
 
