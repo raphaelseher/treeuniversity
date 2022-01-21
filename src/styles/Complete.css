@@ -1,6 +1,37 @@
-
-.CompleteScreen {
-    text-align: -webkit-center;
-    overflow: auto;
-
+.complete {
+  height: 100%;
 }
+
+.complete .complete-scroll {
+  height: 100%;
+  overflow: auto;
+}
+
+.complete .complete-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  min-width: 600px;
+  width: 30%;
+  padding: 90px;
+  gap: var(--margin-spacer);
+}
+
+.complete .complete-content h1 {
+  margin: 0;
+  font-size: 48px;
+}
+
+.complete .complete-content p {
+  text-align: justify;
+}
+
+.complete .complete-content .button {
+  width: 100%;
+}
+
+.complete .card-wrapper {
+  width: 476px;
+}
+
