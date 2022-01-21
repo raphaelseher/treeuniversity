@@ -27,6 +27,19 @@ class Progress {
     return progress >= 100 && finishedMessage;
   };
 
+  static showErrorState = (userData: IRegistrationData): boolean => {
+    const lastMessage =
+      userData.statusMessages[userData.statusMessages.length - 1];
+
+    if (lastMessage.isError) {
+      console.log(
+        "[Progress.showErrorState] Last message is an error, show in UI whats missing."
+      );
+    }
+
+    return lastMessage.isError;
+  };
+
   static calculateProgress = (userData: IRegistrationData) => {
     const isComplete = this.getStepArray(userData, [
       Step.Step1,

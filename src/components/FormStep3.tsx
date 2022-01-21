@@ -3,12 +3,15 @@ import FormStepTitle from "components/FormStepTitle";
 import { Step } from "helper/progress";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 import { ActionType } from "reducer/userDataReducer";
+import Progress from "helper/progress";
 import "styles/FormStep3.css";
 
 function FormStep3() {
   const { state, dispatch } = useUserDataContext();
   const userData = state.userData;
+  const showErrorState = Progress.showErrorState(state.userData);
 
   const optionsMap = new Map<string, string[]>([
     ["", []],
@@ -24,6 +27,9 @@ function FormStep3() {
     <div id="step3">
       <FormStepTitle step={Step.Step3} title="Step 3: Study Selection" />
       <div id="step3-content">
+        {showErrorState && !userData.faculty && (
+          <Alert severity="error">Faculty is missing!</Alert>
+        )}
         <Autocomplete
           disablePortal
           value={userData?.faculty ?? ""}
@@ -45,6 +51,9 @@ function FormStep3() {
           )}
         />
 
+        {showErrorState && !userData.studySubject && (
+          <Alert severity="error">Study Selection is missing!</Alert>
+        )}
         <Autocomplete
           disablePortal
           disabled={!userData.faculty}
