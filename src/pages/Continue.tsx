@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import '../styles/Continue.css';
 import Header from "components/Header"
-import { TextField } from '@mui/material';
+import { Alert, TextField } from '@mui/material';
 import Button from "@mui/material/Button";
 import { width } from '@mui/system';
+import Chip from "@mui/material/Chip";
 
 function Continue() {
   return (
@@ -50,15 +51,30 @@ function Continue() {
         </div>
 
         <div>
-        <Button 
-          variant="outlined" 
-          size='large'
-          style={{marginTop:"8px", width:"38%"}}
-        >
-            Cancel
+          <Link to="/">
+          <Button 
+            variant="outlined" 
+            size='large'
+            style={{marginTop:"8px", width:"38%"}}
+          >
+              Cancel
           </Button>
+          </Link>
         </div>
 
+        <div style={{marginTop:"64px"}}>
+          <span style={{width:"31%", display:"inline-block",textAlign:"right"}}></span>
+          <span style={{width:"38%", display:"inline-block",textAlign:"center"}}>
+          <Alert 
+              severity="error"
+            >Invalid login data</Alert>
+          </span>
+          <span style={{width:"31%", display:"inline-block",textAlign:"left"}}></span>
+          <span style={{width:"38%", display:"block"}}>
+            
+          </span>
+        </div>
+        
       </div>
     </div>
   );

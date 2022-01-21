@@ -34,6 +34,7 @@
   
   .Continue {
     text-align: center;
+    align-content: center;
   }
 
   .Inner {
@@ -43,5 +44,4 @@
 
 h1 {
     color: rgb(73,73,73);
-    
   }

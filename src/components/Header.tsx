@@ -22,7 +22,7 @@ function Header(props: HeaderProps) {
         {
           // different way to do an "if" inside JSX
           state.registrationCode && (
-            <div id="registration-code" style={{alignSelf:"center"}}>
+            <div id="registration-code" style={{alignSelf:"center", marginRight:"10%", float:"right"}} >
               <Chip label={state.registrationCode} />
             </div>
           )
