@@ -4,7 +4,9 @@
   border-bottom: 2px solid var(--default-inactive-color);
 }
 
+
 #header header {
+  /* display: flex; use a flex container */
   display: flex;
   flex-direction: row;
 }

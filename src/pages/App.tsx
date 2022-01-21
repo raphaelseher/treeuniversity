@@ -92,7 +92,7 @@ function App() {
           Register
         </Button>
         <Link to="/continue">
-          <Button variant="outlined">ContinueRegistration</Button>
+          <Button variant="outlined">Continue Registration</Button>
         </Link>
         <Link to="/complete">
           <Button variant="outlined">Complete</Button>
