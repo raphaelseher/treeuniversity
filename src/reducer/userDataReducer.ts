@@ -7,6 +7,7 @@ import {
   addRegistrationCodeMessage,
   addErrorMessage,
   addSuccessMessage,
+  addProgressErrorMessage,
 } from "adapters/FakeTimelineGenerator";
 import Progress from "helper/progress";
 
@@ -72,7 +73,8 @@ export const reducer = (state: State, action: Action): State => {
         console.log(
           "[UserDataReducer] User cannot submit, not completely filled form."
         );
-        // return state;
+
+        return { ...state, userData: addProgressErrorMessage(state.userData) };
       }
 
       // second step, show wrong uploaded file
