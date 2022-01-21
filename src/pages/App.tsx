@@ -6,18 +6,16 @@ import Header from "components/Header";
 import Icon from "public/image/logo.png";
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
-import Storage from "adapters/storage";
 import "styles/App.css";
-import { posix } from "node:path/win32";
-import { isAbsolute } from "node:path/posix";
-import { width } from "@mui/system";
 
 function App() {
-
+  const { state, dispatch } = useUserDataContext();
   const navigate = useNavigate();
   const didClickRegister = () => {
-    // TODO: Generate Registration ID and save empty data in localstore for it.
-    // Send user to register page
+    dispatch({
+      type: ActionType.CreateUserData,
+      payload: {},
+    });
     navigate("/register");
   };
 
@@ -26,14 +24,14 @@ function App() {
       <Header showRegistrationCode={false} />
       <header className="App-header">
         <div className="image">
-          <img src="/image/logo.png" 
-          alt="treeuniversity_logo"
-          style={{
-            marginTop:30,
-            height:200,
-          }}
-          >
-          </img>
+          <img
+            src="/image/logo.png"
+            alt="treeuniversity_logo"
+            style={{
+              marginTop: 30,
+              height: 200,
+            }}
+          ></img>
         </div>
         <div className="Text">
           <h1>Tree University</h1>
@@ -42,39 +40,33 @@ function App() {
           <Button
             variant="contained"
             style={{
-              height:48,
-              width:203
+              height: 48,
+              width: 203,
             }}
             onClick={() => {
               didClickRegister();
-          }}
+            }}
           >
-          Register
+            Register
           </Button>
         </div>
         <div className="continueButton">
           <Link to="/continue">
-          <Button 
-            variant="outlined"
-            style={{
-              margin:10,
-              height:48,
-              width:203
-            }}
+            <Button
+              variant="outlined"
+              style={{
+                margin: 10,
+                height: 48,
+                width: 203,
+              }}
             >
-            Continue
+              Continue
             </Button>
           </Link>
         </div>
       </header>
-      <Link to="/complete">
-        Complete
-      </Link>
     </div>
-
   );
-  // link to "/continue"
 }
 
 export default App;
-
