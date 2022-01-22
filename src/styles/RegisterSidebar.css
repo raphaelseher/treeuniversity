@@ -1,11 +1,13 @@
 #register-page #sidebar {
-  flex-basis: 524px;
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 524px;
   border-left: 2px solid var(--default-inactive-color);
 }
 
 #sidebar .sidebar-content {
   padding: var(--padding-default);
+  border-bottom: 2px solid var(--default-inactive-color);
 }
 
 #sidebar .submit-button {
@@ -20,4 +22,13 @@
 #sidebar h2 {
   margin: 0;
   font-size: 34px;
+}
+
+#sidebar .sidebar-scroll-content {
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+#sidebar .sidebar-status-content {
+  padding: var(--padding-default);
 }

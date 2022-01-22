@@ -1,6 +1,7 @@
 import { useUserDataContext } from "context/UserDataContext";
 import { ActionType } from "reducer/userDataReducer";
 import TextField from "@mui/material/TextField";
+import FormStep2 from "components/FormStep2";
 import FormStep3 from "components/FormStep3";
 
 interface RegisterFormProps {}
@@ -42,6 +43,7 @@ function RegisterForm(props: RegisterFormProps) {
         error={!isNameValid}
       />
 
+      <FormStep2 />
       <FormStep3 />
     </div>
   );

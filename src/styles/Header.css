@@ -1,5 +1,5 @@
 #header {
-  height: var(--header-height);
+  min-height: var(--header-height);
   overflow: hidden;
   border-bottom: 2px solid var(--default-inactive-color);
 }
@@ -7,4 +7,11 @@
 #header header {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: var(--margin-default);
+  padding: 0 var(--padding-default) 0 var(--padding-default);
+}
+
+#header header h3 {
+  flex-grow: 999;
 }
