@@ -1,0 +1,29 @@
+#step2-content {
+  display: flex;
+  flex-direction: row;
+  gap: var(--margin-default);
+}
+
+#step2-content .img-wrapper {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+#step2-content .img-wrapper .user-image {
+  background: var(--default-inactive-color);
+  position: relative;
+  top: -1px;
+  left: -1px;
+  object-fit: cover;
+}
+
+#step2-content .step2-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-default);
+}
+
+#step2-content .step2-buttons p {
+  margin: 0;
+}

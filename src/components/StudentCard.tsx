@@ -30,7 +30,7 @@ function StudentCard(props: StudentCardProps) {
               width="82px"
               height="82px"
               className="user-image"
-              src={userData?.image && "data:image/png;base64," + userData.image}
+              src={userData?.image && userData.image}
             />
           </div>
           <div className="name-content">
