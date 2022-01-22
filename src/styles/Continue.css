@@ -18,7 +18,12 @@
   gap: var(--margin-spacer);
 }
 
-.continue .continue-content div {
+.continue .continue-content .fields {
+  width: 100%;
+}
+
+.continue .continue-content .date-picker,
+.continue .continue-content .date-picker .MuiTextField-root {
   width: 100%;
 }
 

@@ -14,8 +14,8 @@ import "styles/Continue.css";
 
 interface RegisterFormProps {}
 function Continue() {
-  const { state } = useUserDataContext();
-  const regCode = state.registrationCode;
+  const { state, dispatch } = useUserDataContext();
+
   const codeRegex = new RegExp("(0-9)+");
   let isCodeValid: boolean = codeRegex.test(regCode);
 
@@ -36,6 +36,7 @@ function Continue() {
         <div className="continue-content">
           <h1>Resume Registration</h1>
           <TextField
+            className="fields"
             variant="outlined"
             label="Registration Code"
             type="name"
@@ -46,16 +47,19 @@ function Continue() {
             error={!isCodeValid}
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker
-              label="Date of Birth"
-              minDate={new Date("1900-01-01")}
-              onChange={(newValue) => {
-                if (!newValue) return;
-                setDate(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-              value={date}
-            />
+            <div className="date-picker">
+              <DesktopDatePicker
+                label="Date of Birth"
+                minDate={new Date("1900-01-01")}
+                onChange={(newValue) => {
+                  if (!newValue) return;
+                  setDate(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+                value={date}
+                inputFormat="dd.MM.yyyy"
+              />
+            </div>
           </LocalizationProvider>
           <Button
             className="button"
