@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "components/Header";
 import TextField from "@mui/material/TextField";
-import { ActionType } from "reducer/userDataReducer";
 import UserDataContext, { useUserDataContext } from "context/UserDataContext";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { setConstantValue } from "typescript";
-import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+
 import Stack from "@mui/material/Stack";
 import DateAdapter from "@mui/lab/AdapterDayjs";
 import "styles/Continue.css";
@@ -26,6 +27,8 @@ function Continue() {
     navigate("/");
   };
 
+  const [date, setDate] = useState(new Date());
+
   return (
     <div className="continue">
       <Header showRegistrationCode={false} />
@@ -42,16 +45,17 @@ function Continue() {
             }
             error={!isCodeValid}
           />
-          <LocalizationProvider dateAdapter={DateAdapter}>
-            <Stack spacing={3}>
-              <DesktopDatePicker
-                label="For desktop"
-                minDate={new Date("1900-01-01")}
-                onChange={(newValue) => {}}
-                renderInput={(params) => <TextField {...params} />}
-                value={undefined}
-              />
-            </Stack>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="Date of Birth"
+              minDate={new Date("1900-01-01")}
+              onChange={(newValue) => {
+                if (!newValue) return;
+                setDate(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+              value={date}
+            />
           </LocalizationProvider>
           <Button
             className="button"
