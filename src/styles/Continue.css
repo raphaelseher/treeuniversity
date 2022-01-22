@@ -1,13 +1,13 @@
-.complete {
+.continue {
   height: 100%;
 }
 
-.complete .complete-scroll {
+.continue .continue-scroll {
   height: 100%;
   overflow: auto;
 }
 
-.complete .complete-content {
+.continue .continue-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,19 +18,20 @@
   gap: var(--margin-spacer);
 }
 
-.complete .complete-content h1 {
+.continue .continue-content div {
+  width: 100%;
+}
+
+.continue .continue-content h1 {
   margin: 0;
   font-size: 48px;
 }
 
-.complete .complete-content p {
+.continue .continue-content p {
   text-align: justify;
 }
 
-.complete .complete-content .button {
+.continue .continue-content .button {
+  height: 48px;
   width: 100%;
-}
-
-.complete .card-wrapper {
-  width: 476px;
 }
