@@ -2,9 +2,7 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { useUserDataContext } from "context/UserDataContext";
 import "styles/Header.css";
-import { margin } from "@mui/system";
 
-// Parameters are called Props in React.
 type HeaderProps = { showRegistrationCode: boolean };
 function Header(props: HeaderProps) {
   const { state, dispatch } = useUserDataContext();
@@ -23,7 +21,7 @@ function Header(props: HeaderProps) {
           // different way to do an "if" inside JSX
           state.registrationCode && (
             <div id="registration-code" style={{alignSelf:"center", marginRight:"10%", float:"right"}} >
-              <Chip label={state.registrationCode} />
+              <Chip  className="rounded-chip primary-chip" label={state.registrationCode} />
             </div>
           )
         }

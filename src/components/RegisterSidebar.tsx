@@ -39,10 +39,11 @@ function RegisterSidebar(props: RegisterSidebarProps) {
           {buttonTitle}
         </Button>
       </div>
-      <hr />
-      <div className="sidebar-content">
-        <h2>Status Timeline</h2>
-        <StatusTimeline />
+      <div className="sidebar-scroll-content">
+        <div className="sidebar-status-content">
+          <h2>Status Timeline</h2>
+          <StatusTimeline />
+        </div>
       </div>
     </div>
   );
