@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useUserDataContext } from "context/UserDataContext";
 import FormStepTitle from "components/FormStepTitle";
 import { Step } from "helper/progress";
@@ -13,12 +12,72 @@ function FormStep2() {
   const userData = state.userData;
   const showErrorState = Progress.showErrorState(state.userData);
 
-  // regex used for validation of input
   const nameRegex = new RegExp("^([ \u00c0-\u01ffa-zA-Z'-])+$");
-  let isNameValid: boolean =
-    (userData?.firstname?.length ?? 0) == 0
-      ? true
-      : nameRegex.test(userData?.firstname ?? "");
+  const isNameValid = (value: string | undefined): boolean => {
+    if (!value) return true;
+
+    if ((value.length ?? 0) == 0) return true;
+    return nameRegex.test(value ?? "");
+  };
+
+  const emailRegex = new RegExp("[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+");
+  const isEmailValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+
+    if ((value.length ?? 0) == 0) return true;
+    return emailRegex.test(value ?? "");
+  };
+
+  const phoneRegex = new RegExp(
+    "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$"
+  );
+  const isPhoneValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+
+    if ((value.length ?? 0) == 0) return true;
+    return phoneRegex.test(value ?? "");
+  };
+
+  const isNumberValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+    return !isNaN(Number(value));
+  };
+
+  const isStreetNumberValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+    return (value?.length ?? 0) > 0 && (value?.length ?? 0) < 5;
+  };
+
+  const isPLZValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+    return (value?.length ?? 0) > 0 && (value?.length ?? 0) < 7;
+  };
+
+  const isStreetValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+    return (value?.length ?? 0) > 2 && (value?.length ?? 0) < 20;
+  };
+
+  const isDateValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (!value) return true;
+    return false;
+  };
+
+  const missingMessage = (
+    data: string | undefined,
+    fallback: string
+  ): string => {
+    if (showErrorState && (data ?? "").length == 0) return "Missing field";
+
+    return fallback;
+  };
 
   return (
     <div id="step1">
@@ -41,9 +100,11 @@ function FormStep2() {
             }}
             placeholder="John"
             helperText={
-              isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+              isNameValid(userData.firstname)
+                ? undefined
+                : missingMessage(userData.firstname, "Only letters allowed")
             }
-            error={!isNameValid}
+            error={!isNameValid(userData.firstname)}
           />
           <TextField
             className="grow-1"
@@ -61,9 +122,11 @@ function FormStep2() {
             }}
             placeholder="Doe"
             helperText={
-              isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+              isNameValid(userData.lastname)
+                ? undefined
+                : missingMessage(userData.lastname, "Only letters allowed")
             }
-            error={!isNameValid}
+            error={!isNameValid(userData.lastname)}
           />
         </div>
         <div className="row">
@@ -82,11 +145,13 @@ function FormStep2() {
                   },
                 });
               }}
-              placeholder="John"
+              placeholder="12345678"
               helperText={
-                isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+                isNumberValid(userData.svnr)
+                  ? undefined
+                  : missingMessage(userData.svnr, "Only digits allowed")
               }
-              error={!isNameValid}
+              error={!isNumberValid(userData.svnr)}
             />
             <TextField
               className="grow-1"
@@ -105,11 +170,16 @@ function FormStep2() {
                   },
                 });
               }}
-              placeholder="Doe"
+              placeholder="14.01.2000"
               helperText={
-                isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+                isNameValid(userData.birthDate)
+                  ? undefined
+                  : missingMessage(
+                      userData.birthDate,
+                      "Enter date like: 14.01.2000"
+                    )
               }
-              error={!isNameValid}
+              error={!isNameValid(userData.birthDate)}
             />
           </div>
           <TextField
@@ -126,11 +196,13 @@ function FormStep2() {
                 },
               });
             }}
-            placeholder="Doe"
+            placeholder="London"
             helperText={
-              isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+              isNameValid(userData.placeOfBirth)
+                ? undefined
+                : missingMessage(userData.placeOfBirth, "Only letters allowed")
             }
-            error={!isNameValid}
+            error={!isNameValid(userData.placeOfBirth)}
           />
         </div>
         <div className="row">
@@ -149,11 +221,16 @@ function FormStep2() {
                   },
                 });
               }}
-              placeholder="John"
+              placeholder="1010"
               helperText={
-                isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+                isPLZValid(userData.plz)
+                  ? undefined
+                  : missingMessage(
+                      userData.plz,
+                      "Enter Postcal Code between 1 and 6 digits"
+                    )
               }
-              error={!isNameValid}
+              error={!isPLZValid(userData.plz)}
             />
             <TextField
               className="grow-1"
@@ -171,9 +248,11 @@ function FormStep2() {
               }}
               placeholder="London"
               helperText={
-                isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+                isNameValid(userData.town)
+                  ? undefined
+                  : missingMessage(userData.town, "Only letters allowed")
               }
-              error={!isNameValid}
+              error={!isNameValid(userData.town)}
             />
           </div>
           <div className="group grow-1">
@@ -193,15 +272,20 @@ function FormStep2() {
               }}
               placeholder="Baker Street"
               helperText={
-                isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+                isStreetValid(userData.street)
+                  ? undefined
+                  : missingMessage(
+                      userData.street,
+                      "Enter value between 3 and 20 length"
+                    )
               }
-              error={!isNameValid}
+              error={!isStreetValid(userData.street)}
             />
             <TextField
               className="quarter"
               variant="outlined"
               label="Street Nr."
-              type="number"
+              type="text"
               value={userData.streetNumber}
               onChange={(e) => {
                 dispatch({
@@ -213,9 +297,17 @@ function FormStep2() {
               }}
               placeholder="14"
               helperText={
-                isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+                isStreetNumberValid(userData.streetNumber)
+                  ? undefined
+                  : missingMessage(
+                      userData.streetNumber,
+                      missingMessage(
+                        userData.streetNumber,
+                        "Enter number between 1 and 4 digits"
+                      )
+                    )
               }
-              error={!isNameValid}
+              error={!isStreetNumberValid(userData.streetNumber)}
             />
           </div>
         </div>
@@ -224,7 +316,7 @@ function FormStep2() {
             className="grow-1"
             variant="outlined"
             label="Phone Number"
-            type="tel"
+            type="text"
             value={userData.phone}
             onChange={(e) => {
               dispatch({
@@ -236,9 +328,14 @@ function FormStep2() {
             }}
             placeholder="0123 12304123"
             helperText={
-              isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+              isPhoneValid(userData.phone)
+                ? undefined
+                : missingMessage(
+                    userData.phone,
+                    "Enter phone like: +43123445678. (10 - 12 digits)"
+                  )
             }
-            error={!isNameValid}
+            error={!isPhoneValid(userData.phone)}
           />
           <TextField
             className="grow-1"
@@ -254,11 +351,13 @@ function FormStep2() {
                 },
               });
             }}
-            placeholder="Doe"
+            placeholder="sendlove@treeuniversity.com"
             helperText={
-              isNameValid ? undefined : "Keine Sonderzeichen verwenden"
+              isEmailValid(userData.email)
+                ? undefined
+                : missingMessage(userData.email, "Email is not valid")
             }
-            error={!isNameValid}
+            error={!isEmailValid(userData.email)}
           />
         </div>
       </div>
