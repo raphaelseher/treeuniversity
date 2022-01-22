@@ -1,7 +1,8 @@
 :root {
   --primary-color: #388e3c;
   --primary-light-color: #6abf69;
-  --primary-dark-color: #00600f;
+  --primary-dark-color: #317c34;
+  --primary-dark-color5: rgba(49, 124, 52, 0.05);
   --success-color: #1bb55c;
   --error-color: #f44336;
 
@@ -32,4 +33,20 @@ body,
 
 .App {
   text-align: center;
+}
+
+.MuiChip-outlined.rounded-chip {
+  border-radius: 8px;
+}
+
+.MuiChip-outlined.rounded-chip.inactive-chip {
+  border-color: var(--default-inactive-color);
+  background-color: var(--default-inactive-color20);
+}
+
+.MuiChip-outlined.rounded-chip.primary-chip {
+  border-color: var(--primary-dark-color);
+  color: var(--primary-dark-color);
+  background-color: var(--primary-dark-color5);
+  font-weight: 600;
 }
