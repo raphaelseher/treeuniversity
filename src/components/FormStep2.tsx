@@ -13,17 +13,35 @@ function FormStep2() {
   const { state, dispatch } = useUserDataContext();
   const userData = state.userData;
   const showErrorState = Progress.showErrorState(state.userData);
-  const [openFileSelector, { filesContent, loading }] = useFilePicker({
+  const [openFileSelector, { filesContent, loading, errors }] = useFilePicker({
     readAs: "DataURL",
     maxFileSize: 0.5,
     accept: [".png", ".jpg", ".jpeg"],
   });
 
+  let errorMessage: string | undefined;
+  if (errors.length) {
+    if (errors[0].fileSizeTooSmall) {
+      errorMessage = "File size is too small!";
+    } else if (errors[0].fileSizeToolarge) {
+      errorMessage = "File size is too large!";
+    } else if (errors[0].readerError) {
+      errorMessage = "Problem occured while reading file!";
+    } else if (errors[0].maxLimitExceeded) {
+      errorMessage = "Too many files";
+    } else if (errors[0].minLimitNotReached) {
+      errorMessage = "Not enought files";
+    }
+  }
+
+  if (showErrorState && !userData.image) {
+    errorMessage = "Photo is missing!";
+  }
+
   useEffect(() => {
     const base64Image = filesContent[0]?.content;
     if (base64Image) {
       if (userData.image != base64Image) {
-        console.log(base64Image.length);
         dispatch({
           type: ActionType.UpdateUserData,
           payload: {
@@ -47,9 +65,7 @@ function FormStep2() {
           />
         </div>
         <div className="step2-buttons">
-          {showErrorState && !userData.faculty && (
-            <Alert severity="error">Faculty is missing!</Alert>
-          )}
+          {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
           <Button
             variant="outlined"
             onClick={() => {
@@ -58,7 +74,6 @@ function FormStep2() {
           >
             Upload
           </Button>
-          <Button variant="outlined">Take Photo</Button>
           <p>(allowed File Formats: pdf, jpg, png. Max Filesize 512kb)</p>
         </div>
       </div>

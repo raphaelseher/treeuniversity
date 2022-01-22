@@ -12,7 +12,6 @@
 }
 
 #register-page #form-content {
-  flex-basis: 0;
   flex-grow: 999;
   overflow: scroll;
   padding: var(--padding-default);
