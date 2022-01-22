@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useUserDataContext } from "context/UserDataContext";
 import FormStepTitle from "components/FormStepTitle";
 import { Step } from "helper/progress";
@@ -70,6 +71,29 @@ function FormStep2() {
     return false;
   };
 
+  const isFormValid = (): boolean => {
+    const validities = [
+      isNameValid(userData.firstname),
+      isNameValid(userData.lastname),
+      isNumberValid(userData.svnr),
+      isNameValid(userData.birthDate),
+      isNameValid(userData.placeOfBirth),
+      isPLZValid(userData.plz),
+      isNameValid(userData.town),
+      isStreetValid(userData.street),
+      isStreetNumberValid(userData.streetNumber),
+      isPhoneValid(userData.phone),
+      isEmailValid(userData.email),
+    ];
+    return validities.reduce((result, bool) => {
+      return result && bool;
+    }, true);
+  };
+
+  useEffect(() => {
+    console.log(isFormValid());
+  }, [userData]);
+
   const missingMessage = (
     data: string | undefined,
     fallback: string
@@ -94,7 +118,11 @@ function FormStep2() {
               dispatch({
                 type: ActionType.UpdateUserData,
                 payload: {
-                  newData: { ...userData, firstname: e.target.value },
+                  newData: {
+                    ...userData,
+                    firstname: e.target.value,
+                    validStudentData: isFormValid(),
+                  },
                 },
               });
             }}
@@ -116,7 +144,11 @@ function FormStep2() {
               dispatch({
                 type: ActionType.UpdateUserData,
                 payload: {
-                  newData: { ...userData, lastname: e.target.value },
+                  newData: {
+                    ...userData,
+                    lastname: e.target.value,
+                    validStudentData: isFormValid(),
+                  },
                 },
               });
             }}
@@ -141,7 +173,11 @@ function FormStep2() {
                 dispatch({
                   type: ActionType.UpdateUserData,
                   payload: {
-                    newData: { ...userData, svnr: e.target.value },
+                    newData: {
+                      ...userData,
+                      svnr: e.target.value,
+                      validStudentData: isFormValid(),
+                    },
                   },
                 });
               }}
@@ -166,7 +202,11 @@ function FormStep2() {
                 dispatch({
                   type: ActionType.UpdateUserData,
                   payload: {
-                    newData: { ...userData, birthDate: e.target.value },
+                    newData: {
+                      ...userData,
+                      birthDate: e.target.value,
+                      validStudentData: isFormValid(),
+                    },
                   },
                 });
               }}
@@ -192,7 +232,11 @@ function FormStep2() {
               dispatch({
                 type: ActionType.UpdateUserData,
                 payload: {
-                  newData: { ...userData, placeOfBirth: e.target.value },
+                  newData: {
+                    ...userData,
+                    placeOfBirth: e.target.value,
+                    validStudentData: isFormValid(),
+                  },
                 },
               });
             }}
@@ -217,7 +261,11 @@ function FormStep2() {
                 dispatch({
                   type: ActionType.UpdateUserData,
                   payload: {
-                    newData: { ...userData, plz: e.target.value },
+                    newData: {
+                      ...userData,
+                      plz: e.target.value,
+                      validStudentData: isFormValid(),
+                    },
                   },
                 });
               }}
@@ -242,7 +290,11 @@ function FormStep2() {
                 dispatch({
                   type: ActionType.UpdateUserData,
                   payload: {
-                    newData: { ...userData, town: e.target.value },
+                    newData: {
+                      ...userData,
+                      town: e.target.value,
+                      validStudentData: isFormValid(),
+                    },
                   },
                 });
               }}
@@ -266,7 +318,11 @@ function FormStep2() {
                 dispatch({
                   type: ActionType.UpdateUserData,
                   payload: {
-                    newData: { ...userData, street: e.target.value },
+                    newData: {
+                      ...userData,
+                      street: e.target.value,
+                      validStudentData: isFormValid(),
+                    },
                   },
                 });
               }}
@@ -291,7 +347,11 @@ function FormStep2() {
                 dispatch({
                   type: ActionType.UpdateUserData,
                   payload: {
-                    newData: { ...userData, streetNumber: e.target.value },
+                    newData: {
+                      ...userData,
+                      streetNumber: e.target.value,
+                      validStudentData: isFormValid(),
+                    },
                   },
                 });
               }}
@@ -322,7 +382,11 @@ function FormStep2() {
               dispatch({
                 type: ActionType.UpdateUserData,
                 payload: {
-                  newData: { ...userData, phone: e.target.value },
+                  newData: {
+                    ...userData,
+                    phone: e.target.value,
+                    validStudentData: isFormValid(),
+                  },
                 },
               });
             }}
@@ -347,7 +411,11 @@ function FormStep2() {
               dispatch({
                 type: ActionType.UpdateUserData,
                 payload: {
-                  newData: { ...userData, email: e.target.value },
+                  newData: {
+                    ...userData,
+                    email: e.target.value,
+                    validStudentData: isFormValid(),
+                  },
                 },
               });
             }}
