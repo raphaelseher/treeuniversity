@@ -14,6 +14,7 @@ export enum StatusMessageType {
 }
 
 interface IRegistrationData {
+  validStudentData: boolean;
   firstname?: string;
   lastname?: string;
   birthDate?: string;
