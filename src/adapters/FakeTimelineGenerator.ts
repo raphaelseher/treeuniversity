@@ -44,7 +44,7 @@ export const addRegistrationCodeMessage = (
       message:
         "Your registration code is: " +
         registrationCode +
-        ". Please remember it to resume registration.",
+        ". Please remember it to resume registration. All your progress is saved automatically",
       isError: false,
     },
     userData
