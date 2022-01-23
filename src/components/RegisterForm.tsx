@@ -14,6 +14,7 @@ function RegisterForm(props: RegisterFormProps) {
 
   return (
     <div id="form-content">
+      <h1>Registration</h1>
       <FormStep1 />
       <FormStep2 />
       <FormStep3 />

@@ -15,6 +15,12 @@
   flex-grow: 999;
   overflow: scroll;
   padding: var(--padding-default);
+  margin-bottom: var(--margin-default);
+}
+
+#register-page #form-content h1 {
+  font-size: 48px;
+  margin: 0;
 }
 
 #register-page .step-title h2 {

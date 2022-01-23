@@ -21,9 +21,9 @@ const Root: React.FC = () => {
       <BrowserRouter basename="/treeuniversity">
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/continue" element={<Continue />} />
-          <Route path="/complete" element={<Complete />} />
+          <Route path="register" element={<Register />} />
+          <Route path="continue" element={<Continue />} />
+          <Route path="complete" element={<Complete />} />
           <Route
             path="*"
             element={
