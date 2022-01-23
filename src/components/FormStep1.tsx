@@ -104,6 +104,19 @@ function FormStep1() {
     return fallback;
   };
 
+  useEffect(() => {
+    dispatch({
+      type: ActionType.UpdateUserData,
+      payload: {
+        newData: {
+          ...userData,
+          birthDate: new Date().toISOString(),
+          validStudentData: isFormValid(),
+        },
+      },
+    });
+  }, []);
+
   return (
     <div id="step1">
       <FormStepTitle step={Step.Step1} title="Step 1: Student Data" />
@@ -195,6 +208,7 @@ function FormStep1() {
                 <DesktopDatePicker
                   label="Date of Birth"
                   minDate={new Date("1900-01-01")}
+                  maxDate={new Date()}
                   onChange={(newValue) => {
                     dispatch({
                       type: ActionType.UpdateUserData,
