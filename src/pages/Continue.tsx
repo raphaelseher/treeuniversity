@@ -3,6 +3,7 @@ import { useUserDataContext } from "context/UserDataContext";
 import Header from "components/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -17,17 +18,32 @@ function Continue() {
   const today = new Date();
   today.setHours(0, 0, 0);
 
-  const [regCode, setRegCode] = useState<string | undefined>(undefined);
+  const [regCode, setRegCode] = useState<string | undefined>("");
   const [date, setDate] = useState(today);
+  const [showNotFound, setNotFound] = useState(false);
+  const [showErrorState, setShowErrorState] = useState(false);
 
   const isCodeValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
     if (!value) return true;
     return !isNaN(Number(value));
   };
 
+  const missingMessage = (
+    data: string | undefined,
+    fallback: string
+  ): string => {
+    if (showErrorState && (data ?? "").length == 0) return "Missing field";
+
+    return fallback;
+  };
+
   const navigate = useNavigate();
   const didClickResume = () => {
-    if (!regCode) return;
+    if (!regCode) {
+      setShowErrorState(true);
+      return;
+    }
 
     const data = Storage.dataFor(regCode);
     if (data && data.birthDate == date.toISOString()) {
@@ -39,9 +55,10 @@ function Continue() {
       });
       navigate("/register");
     } else {
-      console.log("not same");
+      setNotFound(true);
     }
   };
+
   const didClickCancel = () => {
     navigate("/");
   };
@@ -63,7 +80,9 @@ function Continue() {
               setRegCode(e.target.value);
             }}
             helperText={
-              isCodeValid(regCode) ? undefined : "Only digits allowed"
+              isCodeValid(regCode)
+                ? undefined
+                : missingMessage(regCode, "Only digits allowed")
             }
             error={!isCodeValid(regCode)}
           />
@@ -100,6 +119,12 @@ function Continue() {
           >
             Cancel
           </Button>
+          {showNotFound && (
+            <Alert className="alert" severity="error">
+              Code with that birthday not found. Please contact us if you need
+              help.
+            </Alert>
+          )}
         </div>
       </div>
     </div>
