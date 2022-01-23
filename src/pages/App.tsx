@@ -24,7 +24,10 @@ function App() {
       <Header showRegistrationCode={false} />
       <div className="app-content">
         <div className="image">
-          <img src="/image/logo.png" alt="treeuniversity_logo"></img>
+          <img
+            src={process.env.PUBLIC_URL + "/image/logo.png"}
+            alt="treeuniversity_logo"
+          ></img>
         </div>
         <div className="Text">
           <h1>Tree University</h1>
