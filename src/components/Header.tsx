@@ -19,7 +19,11 @@ function Header(props: HeaderProps) {
         <h3>Treeuniversity</h3>
         {state.registrationCode && props.showRegistrationCode && (
           <div id="registration-code">
-            <Chip label={state.registrationCode} />
+            <Chip
+              className="rounded-chip primary-chip"
+              variant="outlined"
+              label={state.registrationCode}
+            />
           </div>
         )}
       </header>
