@@ -17,6 +17,7 @@ function FormStep1() {
 
   const nameRegex = new RegExp("^([ \u00c0-\u01ffa-zA-Z'-])+$");
   const isNameValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
     if (!value) return true;
 
     if ((value.length ?? 0) == 0) return true;
