@@ -58,7 +58,6 @@ function Continue() {
                 }}
                 renderInput={(params) => <TextField {...params} />}
                 value={date}
-                inputFormat="dd.MM.yyyy"
               />
             </div>
           </LocalizationProvider>

@@ -12,6 +12,13 @@
   padding: 0 var(--padding-default) 0 var(--padding-default);
 }
 
+#header header .registration-code {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--margin-default);
+}
+
 #header header h3 {
   flex-grow: 999;
 }

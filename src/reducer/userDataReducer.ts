@@ -99,5 +99,5 @@ export const reducer = (state: State, action: Action): State => {
 
 export const defaultUserData: State = {
   registrationCode: "",
-  userData: { statusMessages: [] },
+  userData: { validStudentData: false, statusMessages: [] },
 };

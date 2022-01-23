@@ -82,6 +82,7 @@ class Progress {
     steps: Step[]
   ) => {
     const step1 = [
+      userData.validStudentData ? "true" : undefined,
       userData.firstname,
       userData.lastname,
       userData.birthDate,

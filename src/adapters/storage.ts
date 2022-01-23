@@ -12,6 +12,7 @@ abstract class Storage {
 
   public static addTestData(): void {
     store.set("1", {
+      validStudentData: false,
       firstname: "Raphael",
       lastname: "S",
       birthDate: new Date(1993, 12, 3),
@@ -43,6 +44,7 @@ abstract class Storage {
     ).toString();
 
     store.set(registraionCode, {
+      validStudentData: false,
       firstname: undefined,
       lastname: undefined,
       birthDate: undefined,

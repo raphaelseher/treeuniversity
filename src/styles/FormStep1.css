@@ -1,0 +1,43 @@
+#step1-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-default);
+}
+
+#step1-content .row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--margin-default);
+}
+
+#step1-content .row .group {
+  display: flex;
+  flex-direction: row;
+  gap: var(--margin-default);
+}
+
+#step1-content .date-picker,
+#step1-content .date-picker .MuiTextField-root {
+  width: 100%;
+}
+
+#step1-content .row .quarter {
+  flex-basis: 25%;
+  flex-shrink: 0;
+}
+
+#step1-content .row .half {
+  flex-basis: calc(50% - 8px);
+}
+
+#step1-content .row .grow-1 {
+  flex-grow: 1;
+}
+
+#step1-content .row .grow-2 {
+  flex-grow: 2;
+}
+
+#step1-content .row .grow-3 {
+  flex-grow: 3;
+}
