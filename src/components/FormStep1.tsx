@@ -104,14 +104,11 @@ function FormStep1() {
   };
 
   useEffect(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0);
     dispatch({
       type: ActionType.UpdateUserData,
       payload: {
         newData: {
           ...userData,
-          birthDate: today.toISOString(),
           validStudentData: isFormValid(),
         },
       },

@@ -17,6 +17,7 @@ function Continue() {
 
   const today = new Date();
   today.setHours(0, 0, 0);
+  today.setMilliseconds(0);
 
   const [regCode, setRegCode] = useState<string | undefined>("");
   const [date, setDate] = useState(today);
@@ -94,6 +95,7 @@ function Continue() {
                 onChange={(newValue) => {
                   if (!newValue) return;
                   newValue.setHours(0, 0, 0);
+                  newValue.setMilliseconds(0);
                   setDate(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}

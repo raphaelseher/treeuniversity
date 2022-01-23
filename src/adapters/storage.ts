@@ -43,11 +43,15 @@ abstract class Storage {
       Math.floor(Math.random() * 90000) + 10000
     ).toString();
 
+    const today = new Date();
+    today.setHours(0, 0, 0);
+    today.setMilliseconds(0);
+
     store.set(registraionCode, {
       validStudentData: false,
       firstname: undefined,
       lastname: undefined,
-      birthDate: undefined,
+      birthDate: today,
       svnr: undefined,
       placeOfBirth: undefined,
       plz: undefined,
