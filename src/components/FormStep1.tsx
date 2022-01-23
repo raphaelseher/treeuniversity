@@ -3,10 +3,8 @@ import { useUserDataContext } from "context/UserDataContext";
 import FormStepTitle from "components/FormStepTitle";
 import { Step } from "helper/progress";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import deLocale from "date-fns/locale/de";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { ActionType } from "reducer/userDataReducer";
 import Progress from "helper/progress";
@@ -19,6 +17,7 @@ function FormStep1() {
 
   const nameRegex = new RegExp("^([ \u00c0-\u01ffa-zA-Z'-])+$");
   const isNameValid = (value: string | undefined): boolean => {
+    if (showErrorState && (value?.length ?? 0) == 0) return false;
     if (!value) return true;
 
     if ((value.length ?? 0) == 0) return true;
@@ -103,6 +102,21 @@ function FormStep1() {
 
     return fallback;
   };
+
+  useEffect(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0);
+    dispatch({
+      type: ActionType.UpdateUserData,
+      payload: {
+        newData: {
+          ...userData,
+          birthDate: today.toISOString(),
+          validStudentData: isFormValid(),
+        },
+      },
+    });
+  }, []);
 
   return (
     <div id="step1">
@@ -195,7 +209,9 @@ function FormStep1() {
                 <DesktopDatePicker
                   label="Date of Birth"
                   minDate={new Date("1900-01-01")}
+                  maxDate={new Date()}
                   onChange={(newValue) => {
+                    newValue?.setHours(0, 0, 0);
                     dispatch({
                       type: ActionType.UpdateUserData,
                       payload: {

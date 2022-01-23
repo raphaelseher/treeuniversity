@@ -40,3 +40,7 @@
   height: 48px;
   width: 100%;
 }
+
+.continue .continue-content .alert {
+  width: 100%;
+}

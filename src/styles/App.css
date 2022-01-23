@@ -31,8 +31,32 @@ body,
   color: var(--font-default-dark-color);
 }
 
-.App {
-  text-align: center;
+.app .app-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  min-width: 600px;
+  width: 30%;
+  padding: 90px;
+  gap: var(--margin-spacer);
+}
+
+.app .app-content h1 {
+  margin: 0;
+  font-size: 48px;
+}
+
+.app .app-content .button-group {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: var(--margin-default);
+}
+
+.app .app-content .button {
+  height: 48px;
+  width: 100%;
 }
 
 .MuiChip-outlined.rounded-chip {

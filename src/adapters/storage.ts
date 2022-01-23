@@ -56,7 +56,7 @@ abstract class Storage {
       streetNumber: undefined,
       phone: undefined,
       email: undefined,
-      validUntil: undefined,
+      validUntil: new Date(2022, 1, 9),
       image: undefined,
       faculty: undefined,
       studySubject: undefined,

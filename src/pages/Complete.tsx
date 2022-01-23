@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StudentCard from "components/StudentCard";
 import Header from "components/Header";
 import { Button } from "@mui/material";
+import { useUserDataContext } from "context/UserDataContext";
 import "styles/Complete.css";
 import { textAlign, width } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
 
 function Complete() {
+  const { state, dispatch } = useUserDataContext();
+
   const navigate = useNavigate();
   const didClickFinish = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    if (!state.registrationCode) {
+      navigate("/");
+    }
+  }, []);
+
+  if (!state.registrationCode) {
+    return <p>Please start registration</p>;
+  }
 
   return (
     <div className="complete">
