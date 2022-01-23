@@ -20,51 +20,32 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <Header showRegistrationCode={false} />
-      <header className="App-header">
+      <div className="app-content">
         <div className="image">
-          <img
-            src="/image/logo.png"
-            alt="treeuniversity_logo"
-            style={{
-              marginTop: 30,
-              height: 200,
-            }}
-          ></img>
+          <img src="/image/logo.png" alt="treeuniversity_logo"></img>
         </div>
         <div className="Text">
           <h1>Tree University</h1>
         </div>
-        <div className="registerButton">
+        <div className="button-group">
           <Button
+            className="button"
             variant="contained"
-            style={{
-              height: 48,
-              width: 203,
-            }}
             onClick={() => {
               didClickRegister();
             }}
           >
-            Register
+            Start Registration
           </Button>
-        </div>
-        <div className="continueButton">
-          <Link to="/continue">
-            <Button
-              variant="outlined"
-              style={{
-                margin: 10,
-                height: 48,
-                width: 203,
-              }}
-            >
-              Continue
+          <Link to="/continue" className="button">
+            <Button className="button" variant="outlined">
+              Resume Registration
             </Button>
           </Link>
         </div>
-      </header>
+      </div>
     </div>
   );
 }
