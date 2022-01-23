@@ -1,33 +1,30 @@
 import React, { useState } from "react";
 import Header from "components/Header";
 import TextField from "@mui/material/TextField";
-import UserDataContext, { useUserDataContext } from "context/UserDataContext";
 import Button from "@mui/material/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-
-import Stack from "@mui/material/Stack";
-import DateAdapter from "@mui/lab/AdapterDayjs";
 import "styles/Continue.css";
 
-interface RegisterFormProps {}
 function Continue() {
-  const { state, dispatch } = useUserDataContext();
+  const [regCode, setRegCode] = useState<string | undefined>(undefined);
+  const [date, setDate] = useState(new Date());
 
-  const codeRegex = new RegExp("(0-9)+");
-  let isCodeValid: boolean = codeRegex.test(regCode);
+  const isCodeValid = (value: string | undefined): boolean => {
+    if (!value) return true;
+    return !isNaN(Number(value));
+  };
 
   const navigate = useNavigate();
   const didClickResume = () => {
+    // TODO: check storage for session, add error alert
     navigate("/register");
   };
   const didClickCancel = () => {
     navigate("/");
   };
-
-  const [date, setDate] = useState(new Date());
 
   return (
     <div className="continue">
@@ -39,12 +36,16 @@ function Continue() {
             className="fields"
             variant="outlined"
             label="Registration Code"
-            type="name"
-            placeholder="Registration Code eintragen"
+            type="text"
+            placeholder="12345"
+            value={regCode}
+            onChange={(e) => {
+              setRegCode(e.target.value);
+            }}
             helperText={
-              isCodeValid ? undefined : "Registration Code invalid Format!"
+              isCodeValid(regCode) ? undefined : "Only digits allowed"
             }
-            error={!isCodeValid}
+            error={!isCodeValid(regCode)}
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <div className="date-picker">
