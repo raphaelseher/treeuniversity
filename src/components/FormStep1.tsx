@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUserDataContext } from "context/UserDataContext";
 import FormStepTitle from "components/FormStepTitle";
 import { Step } from "helper/progress";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import deLocale from "date-fns/locale/de";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { ActionType } from "reducer/userDataReducer";
 import Progress from "helper/progress";
 import "styles/FormStep1.css";
 
-function FormStep2() {
+function FormStep1() {
   const { state, dispatch } = useUserDataContext();
   const userData = state.userData;
   const showErrorState = Progress.showErrorState(state.userData);
@@ -65,10 +69,11 @@ function FormStep2() {
     return (value?.length ?? 0) > 2 && (value?.length ?? 0) < 20;
   };
 
+  const [dateInputValid, setDateInputValid] = useState(true);
   const isDateValid = (value: string | undefined): boolean => {
-    if (showErrorState && (value?.length ?? 0) == 0) return false;
+    if (showErrorState && !value) return false;
     if (!value) return true;
-    return false;
+    return dateInputValid;
   };
 
   const isFormValid = (): boolean => {
@@ -76,7 +81,7 @@ function FormStep2() {
       isNameValid(userData.firstname),
       isNameValid(userData.lastname),
       isNumberValid(userData.svnr),
-      isNameValid(userData.birthDate),
+      isDateValid(userData.birthDate),
       isNameValid(userData.placeOfBirth),
       isPLZValid(userData.plz),
       isNameValid(userData.town),
@@ -89,10 +94,6 @@ function FormStep2() {
       return result && bool;
     }, true);
   };
-
-  useEffect(() => {
-    console.log(isFormValid());
-  }, [userData]);
 
   const missingMessage = (
     data: string | undefined,
@@ -189,38 +190,43 @@ function FormStep2() {
               }
               error={!isNumberValid(userData.svnr)}
             />
-            <TextField
-              className="grow-1"
-              variant="outlined"
-              label="Date of Birth"
-              type="name"
-              value={
-                userData.birthDate &&
-                new Date(userData.birthDate).toLocaleDateString()
-              }
-              onChange={(e) => {
-                dispatch({
-                  type: ActionType.UpdateUserData,
-                  payload: {
-                    newData: {
-                      ...userData,
-                      birthDate: e.target.value,
-                      validStudentData: isFormValid(),
-                    },
-                  },
-                });
-              }}
-              placeholder="14.01.2000"
-              helperText={
-                isNameValid(userData.birthDate)
-                  ? undefined
-                  : missingMessage(
-                      userData.birthDate,
-                      "Enter date like: 14.01.2000"
-                    )
-              }
-              error={!isNameValid(userData.birthDate)}
-            />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <div className="date-picker">
+                <DesktopDatePicker
+                  label="Date of Birth"
+                  minDate={new Date("1900-01-01")}
+                  onChange={(newValue) => {
+                    dispatch({
+                      type: ActionType.UpdateUserData,
+                      payload: {
+                        newData: {
+                          ...userData,
+                          birthDate: newValue?.toISOString(),
+                          validStudentData: isFormValid(),
+                        },
+                      },
+                    });
+                  }}
+                  onError={(t) => {
+                    setDateInputValid(t == null);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      helperText={
+                        isDateValid(userData.birthDate)
+                          ? undefined
+                          : missingMessage(
+                              userData.birthDate,
+                              "Insert date in format 14/01/2020"
+                            )
+                      }
+                    />
+                  )}
+                  value={userData.birthDate}
+                />
+              </div>
+            </LocalizationProvider>
           </div>
           <TextField
             className="half"
@@ -433,4 +439,4 @@ function FormStep2() {
   );
 }
 
-export default FormStep2;
+export default FormStep1;
