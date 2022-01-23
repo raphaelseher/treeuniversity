@@ -71,7 +71,7 @@ export const addProgressErrorMessage = (
 ) => {
   return addMessage(
     {
-      type: StatusMessageType.Request,
+      type: StatusMessageType.Missing,
       timestamp: new Date(),
       name: "System",
       message:

@@ -9,6 +9,7 @@ export interface IStatusMessage {
 export enum StatusMessageType {
   RegistrationCode,
   Submit,
+  Missing,
   Request,
   Finish,
 }
