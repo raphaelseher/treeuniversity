@@ -16,7 +16,7 @@ function Header(props: HeaderProps) {
           width="24"
           height="25"
         />
-        <h3>Treeuniversity</h3>
+        <h3>Tree University</h3>
         {state.registrationCode && props.showRegistrationCode && (
           <div className="registration-code">
             <p>Registration Code</p>

@@ -90,7 +90,7 @@ function FormStep4() {
       <div id="step4-content">
         <div className="row">
           <div className="column-text">
-            <p>Proof of Citizenship</p>
+            <p className="text">Proof of Citizenship</p>
             <p className="subtext">(allowed File Formats: pdf, jpg, png)</p>
           </div>
           <div className="column-button">
@@ -141,7 +141,7 @@ function FormStep4() {
 
         <div className="row">
           <div className="column-text">
-            <p>Proof of Citizenship</p>
+            <p className="text">University Entrance Qualification</p>
             <p className="subtext">(allowed File Formats: pdf, jpg, png)</p>
           </div>
           <div className="column-button">

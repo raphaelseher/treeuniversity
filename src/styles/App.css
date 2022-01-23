@@ -10,6 +10,7 @@
   --default-inactive-color20: rgba(193, 193, 193, 0.2);
 
   --font-default-dark-color: #263238;
+  --font-weight-medium: 500;
   --font-weight-semibold: 600;
 
   --margin-default: 16px;

@@ -19,6 +19,11 @@
   margin: 0;
 }
 
+#step4-content .column-text p.text {
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+}
+
 #step4-content .column-text p .subtext {
   font-size: 12px;
 }
