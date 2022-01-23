@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/treeuniversity/static/css/main.2069928d.css",
-    "main.js": "/treeuniversity/static/js/main.8f28f12f.js",
+    "main.js": "/treeuniversity/static/js/main.8fb6e396.js",
     "static/js/787.8417a7bc.chunk.js": "/treeuniversity/static/js/787.8417a7bc.chunk.js",
     "index.html": "/treeuniversity/index.html",
     "main.2069928d.css.map": "/treeuniversity/static/css/main.2069928d.css.map",
-    "main.8f28f12f.js.map": "/treeuniversity/static/js/main.8f28f12f.js.map",
+    "main.8fb6e396.js.map": "/treeuniversity/static/js/main.8fb6e396.js.map",
     "787.8417a7bc.chunk.js.map": "/treeuniversity/static/js/787.8417a7bc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2069928d.css",
-    "static/js/main.8f28f12f.js"
+    "static/js/main.8fb6e396.js"
   ]
 }
