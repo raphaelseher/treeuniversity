@@ -5,6 +5,7 @@ import RegisterForm from "components/RegisterForm";
 import RegisterSidebar from "components/RegisterSidebar";
 import { useUserDataContext } from "context/UserDataContext";
 import { useNavigate } from "react-router-dom";
+import Progress from "helper/progress";
 import "styles/Register.css";
 
 function Register() {
@@ -14,6 +15,10 @@ function Register() {
   useEffect(() => {
     if (!state.registrationCode) {
       navigate("/");
+    }
+
+    if (Progress.isEnrolled(state.userData)) {
+      navigate("/complete");
     }
   }, []);
 
