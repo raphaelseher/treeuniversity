@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useUserDataContext } from "context/UserDataContext";
 import Header from "components/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -6,11 +7,18 @@ import { useNavigate } from "react-router-dom";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import Storage from "adapters/storage";
+import { ActionType } from "reducer/userDataReducer";
 import "styles/Continue.css";
 
 function Continue() {
+  const { state, dispatch } = useUserDataContext();
+
+  const today = new Date();
+  today.setHours(0, 0, 0);
+
   const [regCode, setRegCode] = useState<string | undefined>(undefined);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(today);
 
   const isCodeValid = (value: string | undefined): boolean => {
     if (!value) return true;
@@ -19,8 +27,20 @@ function Continue() {
 
   const navigate = useNavigate();
   const didClickResume = () => {
-    // TODO: check storage for session, add error alert
-    navigate("/register");
+    if (!regCode) return;
+
+    const data = Storage.dataFor(regCode);
+    if (data && data.birthDate == date.toISOString()) {
+      dispatch({
+        type: ActionType.UpdateRegistrationCode,
+        payload: {
+          newCode: regCode,
+        },
+      });
+      navigate("/register");
+    } else {
+      console.log("not same");
+    }
   };
   const didClickCancel = () => {
     navigate("/");
@@ -54,6 +74,7 @@ function Continue() {
                 minDate={new Date("1900-01-01")}
                 onChange={(newValue) => {
                   if (!newValue) return;
+                  newValue.setHours(0, 0, 0);
                   setDate(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}

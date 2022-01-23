@@ -3,10 +3,8 @@ import { useUserDataContext } from "context/UserDataContext";
 import FormStepTitle from "components/FormStepTitle";
 import { Step } from "helper/progress";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import deLocale from "date-fns/locale/de";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { ActionType } from "reducer/userDataReducer";
 import Progress from "helper/progress";
@@ -105,12 +103,14 @@ function FormStep1() {
   };
 
   useEffect(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0);
     dispatch({
       type: ActionType.UpdateUserData,
       payload: {
         newData: {
           ...userData,
-          birthDate: new Date().toISOString(),
+          birthDate: today.toISOString(),
           validStudentData: isFormValid(),
         },
       },
@@ -210,6 +210,7 @@ function FormStep1() {
                   minDate={new Date("1900-01-01")}
                   maxDate={new Date()}
                   onChange={(newValue) => {
+                    newValue?.setHours(0, 0, 0);
                     dispatch({
                       type: ActionType.UpdateUserData,
                       payload: {
